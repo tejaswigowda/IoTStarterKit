@@ -15,6 +15,9 @@ int ledPin = 13;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+  
   button.setupSensor(7);
   
   Serial.println("setupSensor complete.");
