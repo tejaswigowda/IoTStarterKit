@@ -2,11 +2,11 @@
 
 
 PushButton::PushButton(){
-	objectID = pushButtonObjectID;
+	objectID = PUSHBUTTON_ID;
 }
 
 PushButton::PushButton(int newReadPin){
-	objectID = pushButtonObjectID;
+	objectID = PUSHBUTTON_ID;
 	if(newReadPin >= 0)
 		readPin = newReadPin;
 }

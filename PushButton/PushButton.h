@@ -5,18 +5,17 @@
 
 class PushButton : public Sensor{
 protected:
-	const 	int   pushButtonObjectID = PUSHBUTTON_ID;
-		int   readPin 	         = -1; //-1 by default to force user to specify the readPin
+			int   readPin 	         = -1; //-1 by default to force user to specify the readPin
 
 public:
 	              PushButton( void);
-		      PushButton(  int);
-		int   setReadPin(  int);
+		      	  PushButton(  int);
+			int   setReadPin(  int);
 
 		//inherited from Sensor.h
-		int   setupSensor(void);
-		int   setupSensor( int);
-		float readSensor( void);
+			int   setupSensor(void);
+			int   setupSensor( int);
+			float readSensor( void);
 };
 
 #endif
