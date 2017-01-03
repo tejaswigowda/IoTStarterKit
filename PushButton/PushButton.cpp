@@ -24,6 +24,8 @@ int PushButton::setReadPin(int newReadPin){
 
 int PushButton::setupSensor(){
 	if(readPin >= 0){
+		digitalWrite(readPin, LOW);
+		pinMode(readPin, INPUT);
 		return SUCCESS;
 	}
 	
