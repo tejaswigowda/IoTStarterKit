@@ -32,6 +32,17 @@ int PushButton::setupSensor(){
 	return FAIL;
 }
 
+int PushButton::setupSensor(int newReadPin){
+	if(newReadPin >= 0){
+		readPin = newReadPin;
+		PushButton::setupSensor();
+
+		return SUCCESS;
+	}
+
+	return FAIL;
+}
+
 int PushButton::readSensor(){
 	if(readPin < 0){
 		return FAIL;
