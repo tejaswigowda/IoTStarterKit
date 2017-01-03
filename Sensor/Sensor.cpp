@@ -1,7 +1,7 @@
 #include "Sensor.h"
 
 	Sensor::Sensor(){
-	  objectID = sensorObjectID;
+	  objectID = SENSOR_ID;
 }
 
 int	Sensor::setupSensor(){

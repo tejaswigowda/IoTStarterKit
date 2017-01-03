@@ -6,12 +6,11 @@
 
 class Sensor{
 protected:
-	const 	int sensorObjectID = SENSOR_ID;
-	  	int objectID;
+	  		int objectID;
 
 public:
-		    Sensor(		    );
-		int getObjectID(	void); //This does not need to be overridden
+		    	Sensor(		  void);
+			int getObjectID(  void); //This does not need to be overridden
 
 	//These functions must be overridden
 	virtual int   setupSensor(	void) = 0;
