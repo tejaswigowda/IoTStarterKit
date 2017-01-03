@@ -6,7 +6,7 @@
 
 class Sensor{
 protected:
-	const 	int sensorObjectID = 0;
+	const 	int sensorObjectID = SENSOR_ID;
 	  	int objectID;
 
 public:
