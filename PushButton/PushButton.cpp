@@ -43,7 +43,7 @@ int PushButton::setupSensor(int newReadPin){
 	return FAIL;
 }
 
-int PushButton::readSensor(){
+float PushButton::readSensor(){
 	if(readPin < 0){
 		return FAIL;
 	}
