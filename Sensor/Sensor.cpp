@@ -1,17 +1,17 @@
 #include "Sensor.h"
 
-Sensor::Sensor(){
-	objectID = sensorObjectID;
+	Sensor::Sensor(){
+	  objectID = sensorObjectID;
 }
 
-int Sensor::setupSensor(){
-	return UNKNOWN;
+int	Sensor::setupSensor(){
+	  return UNKNOWN;
 }
 
-int Sensor::readSensor(){
-	return UNKNOWN;
+float	Sensor::readSensor(){
+	  return UNKNOWN;
 }
 
-int Sensor::getObjectID(){
-	return objectID;
+int	Sensor::getObjectID(){
+	  return objectID;
 }
