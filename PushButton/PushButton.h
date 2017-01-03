@@ -5,8 +5,8 @@
 
 class PushButton : public Sensor{
 protected:
-	const 	int pushButtonObjectID = 1;
-		int readPin 		  = -1; //-1 by default to force user to specify the readPin
+	const 	int pushButtonObjectID = PUSHBUTTON_ID;
+		int readPin 	       = -1; //-1 by default to force user to specify the readPin
 
 public:
 	            PushButton(	void);
