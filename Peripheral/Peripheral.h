@@ -5,4 +5,7 @@
 #define FAIL -1
 #define UNKNOWN -1
 
+#define SENSOR_ID 0
+#define PUSHBUTTON_ID 1
+
 #endif
