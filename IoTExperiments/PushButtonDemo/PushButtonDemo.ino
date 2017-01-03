@@ -1,6 +1,6 @@
 /*
- * In this sketch, loop() repeatedly calls the push button's readSensor() function and 
- * controls an led according to the state of the PB.
+ * In this sketch, the loop function quickly reads the state of the PushButton object
+ * and outputs the state to pin 13.
  * 
  * A user could simply read the state of the GPIO pin to which the PushButton is connected,
  * but the purpose of this sketch is to demonstrate the Sensor interface of the the Sensors
@@ -9,13 +9,13 @@
 
 #include "PushButton.h"
 
-PushButton button = PushButton(7); //PB is attached to GPIO at pin 7
+PushButton button = PushButton();
 int ledPin = 13;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  button.setupSensor();   //this implicitly sets the GPIO to INPUT mode
+  button.setupSensor(7);
   
   Serial.println("setupSensor complete.");
   Serial.print("Sensor object id = ");
