@@ -5,17 +5,17 @@
 
 class PushButton : public Sensor{
 protected:
-			int   readPin 	         = -1; //-1 by default to force user to specify the readPin
+			int    readPin      = -1; //-1 by default to force user to specify the readPin
 
 public:
-	              PushButton( void);
-		      	  PushButton(  int);
-			int   setReadPin(  int);
+	              	       PushButton( void);
+		      	       PushButton(  int);
+			int    setReadPin(  int);
 
-		//inherited from Sensor.h
-			int   setupSensor(void);
-			int   setupSensor( int);
-			float readSensor( void);
+			int    setupSensor( int);	
+		        //The functions below are inherited from Sensor.h
+			int    setupSensor(void);
+			float  readSensor( void);
 };
 
 #endif
