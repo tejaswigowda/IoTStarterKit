@@ -48,9 +48,9 @@ int PushButton::readSensor(){
 		return FAIL;
 	}
 
-	pinMode(readPin, INPUT);
 	digitalWrite(readPin, LOW);
-
+	pinMode(readPin, INPUT);
+	
 	return digitalRead(readPin);
 
 }
