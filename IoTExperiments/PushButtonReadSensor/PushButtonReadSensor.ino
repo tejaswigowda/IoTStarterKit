@@ -10,14 +10,27 @@ void setup() {
 
   pb.setupSensor();
   dht.setupSensor();
+
+  Serial.print("Pushbutton sensor id: \t");
+  Serial.println(pb.getObjectID());
+  Serial.print("DHT11 sensor id: \t");
+  Serial.println(dht.getObjectID());
+
+  Serial.println("setup() end. Entering loop() \n");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   if(pb.readSensor() == HIGH){
-    Serial.print("The temperature is: ");
+    
+    Serial.print("The temperature is: \t");
     Serial.print(dht.readSensor(TEMPERATURE));
     Serial.println(" degrees celsius.");
-  }
+    
+    Serial.print("The humidity is: \t");
+    Serial.print(dht.readSensor(HUMIDITY));
+    Serial.println("%\n");
+  }//if
+  
   delay(100);
 }
