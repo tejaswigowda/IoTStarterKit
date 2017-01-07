@@ -13,7 +13,7 @@ PushButton::PushButton(int newReadPin){
 
 int PushButton::setReadPin(int newReadPin){
 	if(newReadPin < 0){
-		return FAIL;
+		return FAILURE;
 	}
 
 	readPin = newReadPin;
@@ -29,7 +29,7 @@ int PushButton::setupSensor(){
 		return SUCCESS;
 	}
 	
-	return FAIL;
+	return FAILURE;
 }
 
 int PushButton::setupSensor(int newReadPin){
@@ -40,12 +40,12 @@ int PushButton::setupSensor(int newReadPin){
 		return SUCCESS;
 	}
 
-	return FAIL;
+	return FAILURE;
 }
 
 float PushButton::readSensor(){
 	if(readPin < 0){
-		return FAIL;
+		return FAILURE;
 	}
 
 	digitalWrite(readPin, LOW);
