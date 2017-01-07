@@ -9,14 +9,9 @@ Phillip Noel
 #if !defined(IOT_DHT_H)
 #define IOT_DHT_H
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
 
-#include "DHT.h"
 #include "Sensor.h"
+#include "DHT.h"
 
 #define HUMIDITY false
 #define TEMPERATURE true
