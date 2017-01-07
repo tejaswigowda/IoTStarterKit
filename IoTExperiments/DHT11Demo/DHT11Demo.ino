@@ -5,6 +5,7 @@
 #include "IoTDHT11.h"
 
 IoTDHT11 dht(8);
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
