@@ -5,11 +5,11 @@
 }
 
 int	Sensor::setupSensor(){
-	  return UNKNOWN;
+	  return IOT_UNKNOWN;
 }
 
 float	Sensor::readSensor(){
-	  return UNKNOWN;
+	  return IOT_UNKNOWN;
 }
 
 int	Sensor::getObjectID(){
