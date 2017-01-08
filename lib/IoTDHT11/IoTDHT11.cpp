@@ -17,22 +17,22 @@ IoTDHT11::IoTDHT11(int newReadPin){
 
 int IoTDHT11::setReadPin(int newReadPin){
 	if(newReadPin < 0){
-		return FAILURE;
+		return IOT_UNKNOWN;
 	}
 
 	readPin = newReadPin;
 
-	return SUCCESS;
+	return IOT_SUCCESS;
 }
 
 
 int IoTDHT11::setupSensor(){
 	if(readPin >= 0){
 		sensor->begin();
-		return SUCCESS;
+		return IOT_SUCCESS;
 	}
 	
-	return FAILURE;
+	return IOT_UNKNOWN;
 }
 
 int IoTDHT11::setupSensor(int newReadPin){
@@ -40,15 +40,15 @@ int IoTDHT11::setupSensor(int newReadPin){
 		readPin = newReadPin;
 		IoTDHT11::setupSensor();
 
-		return SUCCESS;
+		return IOT_SUCCESS;
 	}
 
-	return FAILURE;
+	return IOT_UNKNOWN;
 }
 
 float IoTDHT11::readSensor(){
 	if(readPin < 0){
-		return FAILURE;
+		return IOT_UNKNOWN;
 	}
 
 	return sensor->readTemperature(false);
