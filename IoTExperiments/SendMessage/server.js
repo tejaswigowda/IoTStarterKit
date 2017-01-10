@@ -6,7 +6,7 @@ var transporter = nodemailer.createTransport('smtps://test%40foxyninjastudios.co
 // setup e-mail data with unicode symbols
 var mailOptions = {
     from: '"" <test@foxyninjastudios.com>', // sender address
-    to: 'tejaswil@gmail.com, 6238065387@txt.att.net', 'gagecsmith93@gmail.com' // list of receivers
+    to: 'tejaswil@gmail.com, 6238065387@txt.att.net', 'gagecsmith93@gmail.com', 'masutz@gmail.com' // list of receivers
     subject: 'Test message', // Subject line
     text: 'Hello world ?', // plaintext body
     html: ''
