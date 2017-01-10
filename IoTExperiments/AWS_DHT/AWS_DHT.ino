@@ -76,6 +76,9 @@ void loop() {
     url += String(dht.readSensor(TEMPERATURE));
     url += "&h=";
     url += String(dht.readSensor(HUMIDITY));
+    url += "&key=";
+    url += "15974c1d771020e5";
+    
 
     Serial.print("Requesting URL: ");
     Serial.println(url);
