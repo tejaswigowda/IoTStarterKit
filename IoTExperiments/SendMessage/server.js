@@ -8,11 +8,9 @@ var mailOptions = {
     from: '"" <test@foxyninjastudios.com>', // sender address
     to: 'tejaswil@gmail.com, 6238065387@txt.att.net',
     subject: 'Test message', // Subject line
-    text: 'Hello world ?', // plaintext body
+    text: 'Hello world !', // plaintext body
     html: ''
 };
-
-
 
 var express = require("express");
 var app = express();
