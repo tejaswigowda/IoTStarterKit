@@ -9,7 +9,7 @@ var mailOptions = {
     to: 'tejaswil@gmail.com, 6238065387@txt.att.net', // list of receivers
     subject: 'Test message', // Subject line
     text: 'Hello world ?', // plaintext body
-    html: '<b>Hello world ?</b>' // html body
+    html: ''
 };
 
 
@@ -33,6 +33,8 @@ app.get('/sendData', function(req, res){
         return;
     }  
     console.log(h,t,key);
+    mailOptions.subject = "Latest Data";
+    mailOptions.text= "Humidity : " + h + "\n Temperature: " + t;
 
     transporter.sendMail(mailOptions, function(error, info){
       if(error){
