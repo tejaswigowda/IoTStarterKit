@@ -13,7 +13,7 @@
 const char* ssid     = "Cartel";
 const char* password = "Espresso";
 
-const char* host = "54.86.87.210";
+const char* host = "34.196.139.141";
 const char* streamId   = "....................";
 const char* privateKey = "....................";
 
