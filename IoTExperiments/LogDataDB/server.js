@@ -19,8 +19,6 @@ app.get('/sendData', function(req, res){
         return;
     }  
     console.log(h,t,key);
-    mailOptions.subject = "Latest Data";
-    mailOptions.text= "Humidity : " + h + "\n Temperature: " + t;
 
      info.ts = new Date().getTime();
       db.collection('data').insert(info, function(err3, r3) {
@@ -33,10 +31,12 @@ app.get('/sendData', function(req, res){
       }); 
 
 });
-app.get('/getState', function(req, res){
+app.get('/getData', function(req, res){
+    db.collection('data').find().toArray(function(err3, r3) {
     res.writeHead(200, {"Content-Type": "text/plain"});
-      res.write(String(reading));
-        res.end()
+    res.write(JSON.stringify(r3));
+    res.end()
+});
 
 });
 
