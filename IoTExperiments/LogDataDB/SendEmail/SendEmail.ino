@@ -52,7 +52,7 @@ long lastRead = millis();
 
 void loop() {
   if (millis() > lastRead) {
-    lastRead += millis() + 60000;
+    lastRead += 60000;
     ++value;
 
     Serial.print("connecting to ");
