@@ -48,11 +48,11 @@ void setup() {
 //== == == == == == == == == == == == == == == == == == == == == ==
 
 int value = 0;
-long lastRead = millis();
+long schedule = millis();
 
 void loop() {
-  if (millis() > lastRead) {
-    lastRead += 60000;
+  if (millis() > schedule) {
+    schedule += 60000;
     ++value;
 
     Serial.print("connecting to ");
