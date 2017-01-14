@@ -6,7 +6,7 @@
 <script>
 function start()
 {
-  loadFile("./getData", function(res){
+  loadURL("./getData", function(res){
     var data = JSON.parse(res);
     console.log(data);
   });
