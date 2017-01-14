@@ -2,9 +2,19 @@
 
 <head>
   <script src='script.js'> </script>
+
+<script>
+function start()
+{
+  loadFile("./getData", function(res){
+    var data = JSON.parse(res);
+    console.log(data);
+  });
+}
+</script>
 </head>
 
-<body>
+<body onload='start()'>
   <h1> TEST </h1>
 </body>
 </html>
