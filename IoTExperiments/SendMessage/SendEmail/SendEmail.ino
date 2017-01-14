@@ -71,7 +71,6 @@ void loop() {
 
     // We now create a URI for the request
     String url = "/sendData";
-    url += streamId;
     url += "?t=";
     url += String(dht.readSensor(TEMPERATURE));
     url += "&h=";

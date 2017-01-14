@@ -8,7 +8,6 @@
 
 #include <ESP8266WiFi.h>
 #include "IoTDHT11.h"
-#include "PushButton.h"
 
 const char* ssid     = "Cartel";
 const char* password = "Espresso";
@@ -17,14 +16,12 @@ const char* host = "34.196.139.141";
 const char* streamId   = "....................";
 const char* privateKey = "....................";
 
-PushButton pb(D2);
 IoTDHT11 dht(D3);
 
 void setup() {
   Serial.begin(115200);
   delay(10);
 
-  pb.setupSensor();
   dht.setupSensor();
 
   // We start by connecting to a WiFi network
@@ -51,11 +48,11 @@ void setup() {
 //== == == == == == == == == == == == == == == == == == == == == ==
 
 int value = 0;
-long lastRead = millis();
+long schedule = millis();
 
 void loop() {
-  if ( (pb.readSensor() == HIGH)  && (millis() > lastRead) ) {
-    lastRead += millis() + 5000;
+  if (millis() > schedule) {
+    schedule += 60000;
     ++value;
 
     Serial.print("connecting to ");
@@ -69,9 +66,10 @@ void loop() {
       return;
     }
 
+    Serial.println(dht.readSensor(TEMPERATURE));
+    Serial.println(dht.readSensor(HUMIDITY));
     // We now create a URI for the request
     String url = "/sendData";
-    url += streamId;
     url += "?t=";
     url += String(dht.readSensor(TEMPERATURE));
     url += "&h=";
@@ -101,7 +99,7 @@ void loop() {
       String line = client.readStringUntil('\r');
       Serial.print(line);
     }
-
+    
     Serial.println();
     Serial.println("closing connection");
   }
