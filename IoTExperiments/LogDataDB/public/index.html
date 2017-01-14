@@ -17,8 +17,8 @@ function start()
 
     for (var i = 0; i < 10/*data.length*/; i++){
       var row = data[i];
-      cols[0].append(row.t);
-      cols[1].append(row.h);
+      cols[0].push(row.t);
+      cols[1].push(row.h);
     }
 
     var chart = c3.generate({
