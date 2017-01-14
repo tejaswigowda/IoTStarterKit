@@ -2,13 +2,31 @@
 
 <head>
   <script src='script.js'> </script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.1/d3.min.js"></script>
 <script>
 function start()
 {
   loadURL("./getData", function(res){
     var data = JSON.parse(res);
-    console.log(data);
+    var cols = [
+      ['Temp'],
+      ['Humidity']
+    ];
+
+    for (var i = 0; i < 10/*data.length*/; i++){
+      var row = data[i];
+      cols[0].append(row.t);
+      cols[1].append(row.h);
+    }
+
+    var chart = c3.generate({
+       bindto: '#chart',
+       data: {
+          columns: cols
+       }
+    });
   });
 }
 </script>
@@ -16,5 +34,6 @@ function start()
 
 <body onload='start()'>
   <h1> TEST </h1>
+  <div id="chart"></div>
 </body>
 </html>
