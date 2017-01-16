@@ -1,11 +1,32 @@
+
 <html>
 
 <head>
   <script src='script.js'> </script>
 <script>
+var chart;
 function start()
 {
-  loadURL("./getData", function(res){
+	// set date-time;
+
+   chart = c3.generate({
+       bindto: '#chart',
+       data: {
+          columns: [[]]
+       }
+    });
+	loadGraph();
+}
+
+function loadGraph()
+{
+	
+var from = document.getElementById("fromtime").value;
+from = new Date(from).getTime();
+var to = from + document.getElementById("interval").value;
+
+console.log(from, to)
+  loadURL("./getData?from=" + from + "&to=" + to, function(res){
     var data = JSON.parse(res);
     var cols = [
       ['Temp'],
@@ -17,13 +38,9 @@ function start()
       cols[0].push(row.t);
       cols[1].push(row.h);
     }
-    console.log(cols);
 
-    var chart = c3.generate({
-       bindto: '#chart',
-       data: {
-          columns: cols
-       }
+    chart.load({
+       columns: cols
     });
   });
 }
@@ -32,6 +49,18 @@ function start()
 
 <body onload='start()'>
   <h1> TEST </h1>
+	<input id='fromtime' type='datetime-local' onchange='loadGraph()'>
+	<select id='interval' onchange='loadGraph()'>
+	  <option val='5*60*1000'> last 5 mins </option>
+	  <option val='30*60*1000'> last 30 mins </option>
+	  <option val='60*60*1000'> last 1 hour </option>
+	  <option val='2*60*60*1000'> last 2 hours </option>
+	  <option val='6*60*60*1000'> last 6 hours </option>
+	  <option val='12*60*60*1000'> last 12 hours</option>
+	</select>
+	
+	<button onclick=''loadGraph()> Refresh </button>
+
   <div id="chart"></div>
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
