@@ -20,11 +20,11 @@ void setup() {
   
   button.setupSensor(7);
   
-  Serial.println("setupSensor complete.");
-  Serial.print("Sensor object id = ");
+  Serial.println(F("setupSensor complete."));
+  Serial.print(F("Sensor object id = "));
   Serial.println(button.getObjectID());
   
-  Serial.println("Setup complete. Entering infinite loop.");
+  Serial.println(F("Setup complete. Entering infinite loop."));
 }
 
 void loop() {
