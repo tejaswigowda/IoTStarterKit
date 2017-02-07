@@ -32,7 +32,7 @@ app.get('/sendData', function(req, res){
 
 });
 app.get('/getData', function(req, res){
-    db.collection('data').find().toArray(function(err3, r3) {
+    db.collection('data').find().limit(10).toArray(function(err3, r3) {
     res.writeHead(200, {"Content-Type": "text/plain"});
     res.write(JSON.stringify(r3));
     res.end()

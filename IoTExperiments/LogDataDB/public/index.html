@@ -15,19 +15,18 @@ function start()
           columns: [[]]
        }
     });
-	loadGraph();
+	setInterval(loadGraph, 30000);
 }
 
+var lastTimeStamp = 0;
 function loadGraph()
 {
-	
-var from = document.getElementById("fromtime").value;
-from = new Date(from).getTime();
-var to = from + document.getElementById("interval").value;
-
-console.log(from, to)
-  loadURL("./getData?from=" + from + "&to=" + to, function(res){
+  loadURL("./getData", function(res){
     var data = JSON.parse(res);
+    currTimeStamp = data[0].ts;
+    if(currTimeStamp === lastTimeStamp){
+        return;
+    }
     var cols = [
       ['Temp'],
       ['Humidity']
@@ -42,6 +41,7 @@ console.log(from, to)
     chart.load({
        columns: cols
     });
+    lastTimeStamp = data[0].ts;
   });
 }
 </script>
