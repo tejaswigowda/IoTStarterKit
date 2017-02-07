@@ -15,7 +15,8 @@ function start()
           columns: [[]]
        }
     });
-	setInterval(loadGraph, 30000);
+	loadGraph();
+	setInterval(loadGraph, 3000);
 }
 
 var lastTimeStamp = 0;
@@ -32,7 +33,7 @@ function loadGraph()
       ['Humidity']
     ];
 
-    for (var i = 0; i < 10/*data.length*/; i++){
+    for (var i = data.length-1; i>=0; i--){
       var row = data[i];
       cols[0].push(row.t);
       cols[1].push(row.h);
@@ -48,18 +49,7 @@ function loadGraph()
 </head>
 
 <body onload='start()'>
-  <h1> TEST </h1>
-	<input id='fromtime' type='datetime-local' onchange='loadGraph()'>
-	<select id='interval' onchange='loadGraph()'>
-	  <option val='5*60*1000'> last 5 mins </option>
-	  <option val='30*60*1000'> last 30 mins </option>
-	  <option val='60*60*1000'> last 1 hour </option>
-	  <option val='2*60*60*1000'> last 2 hours </option>
-	  <option val='6*60*60*1000'> last 6 hours </option>
-	  <option val='12*60*60*1000'> last 12 hours</option>
-	</select>
-	
-	<button onclick=''loadGraph()> Refresh </button>
+  <h1> Temp/Humidity Monitor</h1>
 
   <div id="chart"></div>
 </body>
