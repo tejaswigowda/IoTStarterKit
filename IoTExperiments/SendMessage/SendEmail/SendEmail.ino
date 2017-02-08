@@ -24,7 +24,7 @@ void setup() {
   pb.setupSensor();                           //Setup Sensor objects
   dht.setupSensor();
 
-  Serial.print("\nConnecting to ");             //Begin by connecting to wifi network
+  Serial.print("\nConnecting to ");           //Begin by connecting to wifi network
   Serial.println(ssid);
 
   WiFi.begin(ssid, password);
