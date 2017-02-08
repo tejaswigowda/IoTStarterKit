@@ -9,7 +9,7 @@ const char* host      = "34.196.139.141";     //ip address of host
 unsigned long wait    = 30000;                //Time period to connect to host
 unsigned long timeout = 5000;                 //Timeout interval for connection to host
 
-float temperature;
+float temperature;                            //Store IoTDHT11 readings here so you only read IoTDHT11 only once per loop
 uint8_t humidity;
 IoTDHT11 dht(D3);
 
