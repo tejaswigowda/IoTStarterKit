@@ -1,10 +1,10 @@
 #include <ESP8266WiFi.h>
 #include "IoTDHT11.h"
 
-const char* ssid     = "Cartel";              //wifi network info
-const char* password = "Espresso";
+const char* ssid      = "Cartel";             //wifi network info
+const char* password  = "Espresso";
 
-const char* host = "34.196.139.141";          //ip address of host
+const char* host      = "34.196.139.141";     //ip address of host
 
 unsigned long wait    = 30000;                //Time period to connect to host
 unsigned long timeout = 5000;                 //Timeout interval for connection to host
