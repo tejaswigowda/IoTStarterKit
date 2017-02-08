@@ -24,7 +24,7 @@ void setup() {
   pb.setupSensor();                           //Setup Sensor objects
   dht.setupSensor();
 
-  Serial.print("\nConnecting to ");           //Begin by connecting to wifi network
+  Serial.print(F("\nConnecting to "));           //Begin by connecting to wifi network
   Serial.println(ssid);
 
   WiFi.begin(ssid, password);
@@ -34,7 +34,7 @@ void setup() {
     Serial.print(".");
   }
 
-  Serial.println("WiFi connected");
+  Serial.println(F("WiFi connected"));
 }
 
 
@@ -46,18 +46,18 @@ void loop() {
   if (pb.readSensor() == HIGH && millis() > readSchedule) {  //Pass through if the button is not pressed or readDelay has not elapsed
     readSchedule += readDelay;
 
-    Serial.print("The temperature is:\t");    //Read from sensors (and save data) immedately
+    Serial.print(F("The temperature is:\t"));    //Read from sensors (and save data) immedately
     Serial.print(temperature = dht.readSensor(TEMPERATURE));
-    Serial.println(" C.");
+    Serial.println(F(" C."));
     
-    Serial.print("The humidity is:\t");  
+    Serial.print(F("The humidity is:\t"));  
     Serial.print(humidity = dht.readSensor(HUMIDITY));
-    Serial.println("%.");  
+    Serial.println(F("%."));  
      
     WiFiClient client;                        // Use WiFiClient class to create TCP connections
     const int httpPort = 8080;
     if (!client.connect(host, httpPort)) {
-      Serial.println("connection failed");
+      Serial.println(F("connection failed"));
       return;
     }
     
@@ -70,18 +70,18 @@ void loop() {
     url += "15974c1d771020e5";
     
 
-    Serial.print("Requesting URL: ");
+    Serial.print(F("Requesting URL: "));
     Serial.println(url + "\n\n");
 
     client.print(String("GET ") + url + " HTTP/1.1\r\n" +   // This will send the request to the server
                  "Host: " + host + "\r\n" +
                  "Connection: close\r\n\r\n");
 
-    Serial.println("waiting for response");
+    Serial.println(F("waiting for response"));
     timeoutSchedule = millis();             
     while (client.available() == 0) {
       if (millis() - timeoutSchedule > timeout) {
-        Serial.println(">>> Client Timeout !");
+        Serial.println(F(">>> Client Timeout !"));
         client.stop();
         return;
       }//if
@@ -94,6 +94,6 @@ void loop() {
     }//while
     
     Serial.println();
-    Serial.println("closing connection");
+    Serial.println(F("closing connection"));
   }//if
 }//loop

@@ -12,17 +12,17 @@ void setup() {
   
   dht.setupSensor();                              //Setup the objects
   
-  Serial.print("IoTDHT11 object id: ");
+  Serial.print(F("IoTDHT11 object id: "));
   Serial.println(dht.getObjectID());
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.print("Temperature (Celsius): \t");       //Read from the objects
+  Serial.print(F("Temperature (Celsius): \t"));       //Read from the objects
   Serial.println(dht.readSensor(TEMPERATURE));
   
-  Serial.print("Humidity (% humidity): \t");
+  Serial.print(F("Humidity (% humidity): \t"));
   Serial.println(dht.readSensor(HUMIDITY));
   delay(1000);
 
