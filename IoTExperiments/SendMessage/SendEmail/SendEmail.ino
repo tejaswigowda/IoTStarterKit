@@ -2,8 +2,8 @@
 #include "IoTDHT11.h"
 #include "PushButton.h"
 
-const char* ssid        = "Dani24";           //Wifi network info
-const char* password    = "nomatterwhathappensiamok";
+const char* ssid        = "Cartel";           //Wifi network info
+const char* password    = "Espresso";
 
 const char* host        = "34.196.139.141";   //IP address of host
 
