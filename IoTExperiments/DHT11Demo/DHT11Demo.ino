@@ -21,7 +21,6 @@ void loop() {
   // put your main code here, to run repeatedly:
   Serial.print("Temperature (Celsius): \t");
   Serial.println(dht.readSensor(TEMPERATURE));
-  delay(1000);
   
   Serial.print("Humidity (% humidity): \t");
   Serial.println(dht.readSensor(HUMIDITY));
