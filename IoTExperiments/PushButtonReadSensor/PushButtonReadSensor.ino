@@ -1,7 +1,7 @@
 #include "IoTDHT11.h"
 #include "PushButton.h"
 
-PushButton pb(D2);
+PushButton pb(D2);                                       //Create sensor objects
 IoTDHT11 dht(D3);
 
 void setup() {
@@ -9,7 +9,7 @@ void setup() {
   Serial.begin(115200);
   delay(10);
 
-  pb.setupSensor();                                       //Create Sensor objects
+  pb.setupSensor();                                       //Setup Sensor objects
   dht.setupSensor();
   
   Serial.print(F("\nPushbutton sensor id: \t"));          //Print sensor IDs
