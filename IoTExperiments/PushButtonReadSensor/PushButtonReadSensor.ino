@@ -1,3 +1,7 @@
+/*
+*     This sketch reads from a PushButton object and, if it is pressed, reads from the IoTDHT11 object.
+*/
+
 #include "IoTDHT11.h"
 #include "PushButton.h"
 
