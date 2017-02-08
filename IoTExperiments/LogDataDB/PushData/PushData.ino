@@ -1,3 +1,7 @@
+/*
+*   This sketch reads from the IoTDHT11 sensors at constant intervals and sends the data to a remote host using the ESP8266WiFi object
+*/
+
 #include <ESP8266WiFi.h>
 #include "IoTDHT11.h"
 
@@ -19,7 +23,7 @@ void setup() {
 
   dht.setupSensor();                          //Setup DHT11 Sensor object
 
-  Serial.print(F("Connecting to "));             //Begin by connecting to wifi network
+  Serial.print(F("Connecting to "));          //Begin by connecting to wifi network
   Serial.println(ssid);
 
   WiFi.begin(ssid, password);
@@ -41,7 +45,7 @@ void loop() {
   if (millis() > schedule) {                  //Pass through if the current time is not greater than the schedule time.
     schedule += wait;
 
-    Serial.print(F("The temperature is:\t"));    //Read from sensors (and save data) immedately
+    Serial.print(F("The temperature is:\t")); //Read from sensors (and save data) immedately
     Serial.print(temperature = dht.readSensor(TEMPERATURE));
     Serial.println(F(" C."));
     
@@ -83,7 +87,7 @@ void loop() {
     
     }//while
 
-    while (client.available()) {              // Read all the lines of the response from server and print them to Serial
+    while (client.available()) {               // Read all the lines of the response from server and print them to Serial
       String line = client.readStringUntil('\r');
       Serial.print(line);
     }//while
