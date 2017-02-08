@@ -1,3 +1,8 @@
+/*
+*  This sketch reads from a PushButton object. If the PushButton is pressed then the program reads from the IoTDHT11 object
+*  and sends the reading to a remote host using the ESP8266WiFi object.
+*/
+
 #include <ESP8266WiFi.h>
 #include "IoTDHT11.h"
 #include "PushButton.h"
@@ -24,7 +29,7 @@ void setup() {
   pb.setupSensor();                           //Setup Sensor objects
   dht.setupSensor();
 
-  Serial.print(F("\nConnecting to "));           //Begin by connecting to wifi network
+  Serial.print(F("\nConnecting to "));        //Begin by connecting to wifi network
   Serial.println(ssid);
 
   WiFi.begin(ssid, password);
@@ -46,7 +51,7 @@ void loop() {
   if (pb.readSensor() == HIGH && millis() > readSchedule) {  //Pass through if the button is not pressed or readDelay has not elapsed
     readSchedule += readDelay;
 
-    Serial.print(F("The temperature is:\t"));    //Read from sensors (and save data) immedately
+    Serial.print(F("The temperature is:\t")); //Read from sensors (and save data) immedately
     Serial.print(temperature = dht.readSensor(TEMPERATURE));
     Serial.println(F(" C."));
     
