@@ -45,7 +45,7 @@ int PushButton::setupSensor(int newReadPin){
 
 float PushButton::readSensor(){
 	if(readPin < 0){
-		return IOT_FAILURE;
+		return NAN;
 	}
 
 	digitalWrite(readPin, LOW);

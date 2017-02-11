@@ -10,16 +10,17 @@ const char* password  = "Espresso";
 
 const char* host      = "34.196.139.141";     //IP address of host
 
-unsigned long wait    = 30000;                //Time period to connect to host
+unsigned long wait    = 10000;                //Time period to connect to host
 unsigned long timeout = 5000;                 //Timeout interval for connection to host
 
 float temperature;                            //Store readings from IoTDHT11 in variables so you only read from sensor once in a loop
 uint8_t humidity;
-IoTDHT11 dht(D3);
+IoTDHT11 dht(2);
 
 void setup() {
   Serial.begin(115200);
   delay(10);                                  //delay(10) so the Serial monitor does not prinbt garble
+
 
   dht.setupSensor();                          //Setup DHT11 Sensor object
 

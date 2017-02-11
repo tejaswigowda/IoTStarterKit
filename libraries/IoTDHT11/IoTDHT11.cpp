@@ -48,7 +48,7 @@ int IoTDHT11::setupSensor(int newReadPin){
 
 float IoTDHT11::readSensor(){
 	if(readPin < 0){
-		return IOT_UNKNOWN;
+		return NAN;
 	}
 
 	return sensor->readTemperature(false);

@@ -9,7 +9,7 @@ int	Sensor::setupSensor(){
 }
 
 float	Sensor::readSensor(){
-	  return IOT_UNKNOWN;
+	  return NAN;
 }
 
 int	Sensor::getObjectID(){
