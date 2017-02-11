@@ -4,8 +4,8 @@ Phillip Noel
 */
 
 
-#if !defined(PERIPHERAL_H)
-#define PERIPHERAL_H
+#if !defined(IOTSTARTERKIT_H)
+#define IOTSTARTERKIT_H
 
 #define IOT_SUCCESS  0
 #define IOT_FAILURE -1
