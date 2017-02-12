@@ -18,8 +18,8 @@ Phillip Noel
 
 class IoTDHT11 : public Sensor{
 protected:
-			int   readPin 	         = -1; //-1 by default to force user to specify the readPin
-			DHT*  sensor;
+			int   readPin = -1; //-1 by default to force user to specify the readPin
+			DHT   sensor;
 
 public:
 	              IoTDHT11( void);

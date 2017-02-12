@@ -7,8 +7,7 @@ PushButton::PushButton(){
 
 PushButton::PushButton(int newReadPin){
 	objectID = PUSHBUTTON_ID;
-	if(newReadPin >= 0)
-		readPin = newReadPin;
+	setReadPin(newReadPin);
 }
 
 int PushButton::setReadPin(int newReadPin){
@@ -24,7 +23,6 @@ int PushButton::setReadPin(int newReadPin){
 
 int PushButton::setupSensor(){
 	if(readPin >= 0){
-		digitalWrite(readPin, LOW);
 		pinMode(readPin, INPUT);
 		return IOT_SUCCESS;
 	}
@@ -35,7 +33,7 @@ int PushButton::setupSensor(){
 int PushButton::setupSensor(int newReadPin){
 	if(newReadPin >= 0){
 		readPin = newReadPin;
-		PushButton::setupSensor();
+		setupSensor();
 
 		return IOT_SUCCESS;
 	}
@@ -48,7 +46,6 @@ float PushButton::readSensor(){
 		return NAN;
 	}
 
-	digitalWrite(readPin, LOW);
 	pinMode(readPin, INPUT);
 	
 	return digitalRead(readPin);
