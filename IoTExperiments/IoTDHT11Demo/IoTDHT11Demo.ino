@@ -6,7 +6,7 @@
 
 #include "IoTDHT11.h"
 
-IoTDHT11 dht(D3);                                 //Create the object
+IoTDHT11 dht(2);                                 //Create the object
 
 void setup() {
   // put your setup code here, to run once:

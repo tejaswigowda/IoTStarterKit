@@ -21,7 +21,7 @@ Phillip Noel
 
 class Sensor{
 protected:
-	  		int objectID;
+	  		int   objectID;
 
 public:
 		    	  Sensor(		void);

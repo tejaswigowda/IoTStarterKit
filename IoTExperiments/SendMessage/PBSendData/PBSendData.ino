@@ -1,5 +1,5 @@
 /*
-*  This sketch reads from a PushButton object. If the PushButton is pressed then the program reads from the IoTDHT11 object
+*  This sketch reads from PushButton IoTDHT11 objects. If the PushButton is pressed then the program reads from the IoTDHT11 object
 *  and sends the reading to a remote host using the ESP8266WiFi object.
 */
 
@@ -25,6 +25,7 @@ IoTDHT11 dht(D3);
 void setup() {
   Serial.begin(115200);
   delay(10);                                  //delay(10) so the Serial monitor does not prinbt garble
+  Serial.println();
   
   pb.setupSensor();                           //Setup Sensor objects
   dht.setupSensor();

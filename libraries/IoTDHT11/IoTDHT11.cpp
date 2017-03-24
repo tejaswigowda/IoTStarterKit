@@ -1,11 +1,11 @@
 #include "IoTDHT11.h"
 
 
-IoTDHT11::IoTDHT11() : sensor(readPin, DHT11) {
+IoTDHT11::IoTDHT11() : dhtsensor(readPin, DHT11, 30) {
 	objectID = DHT11_ID;
 }
 
-IoTDHT11::IoTDHT11(int newReadPin) : sensor(newReadPin, DHT11) {
+IoTDHT11::IoTDHT11(int newReadPin) : dhtsensor(newReadPin, DHT11, 30) {
 	objectID = DHT11_ID;
 
 	if(newReadPin <= 0)
@@ -26,7 +26,7 @@ int IoTDHT11::setReadPin(int newReadPin){
 
 int IoTDHT11::setupSensor(){
 	if(readPin >= 0){
-		sensor.begin();
+		dhtsensor.begin();
 		return IOT_SUCCESS;
 	}
 	
@@ -50,13 +50,13 @@ float IoTDHT11::readSensor(){
 		return NAN;
 	}
 
-	return sensor.readTemperature(false);
+	return dhtsensor.readTemperature(false);
 }
 
 float IoTDHT11::readSensor(bool val){
 	if(val == HUMIDITY){
-		return sensor.readHumidity();
+		return dhtsensor.readHumidity();
 	}
 	
-	return sensor.readTemperature(false);
+	return dhtsensor.readTemperature(false);
 }

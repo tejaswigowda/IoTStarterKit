@@ -1,6 +1,6 @@
 #include "Sensor.h"
 
-	Sensor::Sensor(){
+Sensor::Sensor(){
 	  objectID = SENSOR_ID;
 }
 

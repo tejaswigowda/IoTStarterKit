@@ -13,24 +13,24 @@ Phillip Noel
 #include "Sensor.h"
 #include "DHT.h"
 
-#define HUMIDITY false
+#define HUMIDITY 	false
 #define TEMPERATURE true
 
 class IoTDHT11 : public Sensor{
 protected:
-			int   readPin = -1; //-1 by default to force user to specify the readPin
-			DHT   sensor;
+	uint8_t   	readPin = -1; 		//-1 by default to force user to specify the readPin
+	DHT   		dhtsensor;
 
 public:
-	              IoTDHT11( void);
-		      	  IoTDHT11(  int);
-			int   setReadPin(int);
+          		IoTDHT11( void);
+      	  		IoTDHT11(  int);
+	int   		setReadPin(int);
 
-			//inherited from Sensor.h
-			int   setupSensor(void);
-			int   setupSensor( int);
-			float readSensor( void);
-			float readSensor( bool);
+	//inherited from Sensor.h
+	int   		setupSensor(void);
+	int   		setupSensor( int);
+	float 		readSensor( void);
+	float 		readSensor( bool);
 };
 
 
