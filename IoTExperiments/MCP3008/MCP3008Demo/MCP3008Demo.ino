@@ -1,27 +1,21 @@
 #include "MCP3008.h"
 
-#define clk D5
-#define mosi D7
-#define miso D6
-#define cs D8
-
-MCP3008 adc;//(clk, mosi, miso, cs);
+int csPin = D8;
 
 void setup() {
+  // put your setup code here, to run once:
   Serial.begin(115200);
-  adc.setupSensor();
+  Serial.println();
+  SPI.begin();
   
-  for (int i = 0; i < 10; i++) {
-    float val = adc.readSensor(CH0); // read Chanel 0 from MCP3008 ADC
-    Serial.println(val);
-    delay(100);
-  }
-
+  pinMode(csPin, OUTPUT);
+  digitalWrite(csPin, HIGH);
+  digitalWrite(csPin, LOW);
+  digitalWrite(csPin, HIGH);
 }
 
-
 void loop() {
-  Serial.println(adc.readSensor(CH0));
+  // put your main code here, to run repeatedly:
+  Serial.println(readMCP(1, csPin));
   delay(100);
-
 }
