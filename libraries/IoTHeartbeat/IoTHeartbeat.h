@@ -9,21 +9,24 @@
 class IoTHeartbeat : public Sensor{
 private:
 	MCP3008		mcp;
+	MCP3008*	mcpPtr = &mcp;
 	int			channel;
 	bool 		usesMCP;
 	uint16_t 	buffer[30];
-	int (IoTHeartbeat::*funcptrs[2])(int) = {&IoTHeartbeat::readADC, &IoTHeartbeat::readAnalogPin};
+
+	//int (IoTHeartbeat::*funcptrs[2])(int) = {&IoTHeartbeat::readAnalogPin, &IoTHeartbeat::readADC};
 
 public:
 				IoTHeartbeat();
-				IoTHeartbeat(bool, int);	
-	int 		setupSensor();
-	int 		setupSensor(MCP3008*, int);
-	float 		readSensor();
-	//float 		readSensor(int);
+				IoTHeartbeat(bool, int);
+				IoTHeartbeat(MCP3008*, int);
 
-	int 		readADC(int);
-	int 		readAnalogPin(int);
+	int 		setupSensor();
+	int 		setupSensor(int);
+	int 		setupSensor(MCP3008*, int);
+
+	float 		readSensor();
+	int 		readSensor(int);
 };
 
 #endif

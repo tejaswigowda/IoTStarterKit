@@ -15,6 +15,5 @@ Phillip Noel
 #define PUSHBUTTON_ID 	1
 #define DHT11_ID 		2
 #define HEARTBEAT_ID    3
-#define MCP3008_ID		4
 
 #endif

@@ -1,75 +1,25 @@
 #include "MCP3008.h"
 
-MCP3008::MCP3008() : _clockpin(DEFAULT_CLK), _mosipin(DEFAULT_MOSI), _misopin(DEFAULT_MISO), _cspin(DEFAULT_CS){
-  pinMode(_cspin, OUTPUT);
-  pinMode(_clockpin, OUTPUT);
-  pinMode(_mosipin, OUTPUT);
-  pinMode(_misopin, INPUT);
-}
-
-MCP3008::MCP3008(int clockpin, int mosipin, int misopin, int cspin) {
-    
-    // define SPI outputs and inputs for bitbanging
-    _clockpin = clockpin;
-    _mosipin = mosipin;
-    _misopin = misopin;
-    _cspin = cspin;
-    
-    pinMode(_cspin, OUTPUT);
-    pinMode(_clockpin, OUTPUT);
-    pinMode(_mosipin, OUTPUT);
-    pinMode(_misopin, INPUT);
-    
-}
-
-int MCP3008::setupSensor(){}
-
-float MCP3008::readSensor(){
-  readSensor(0);
-}
-
-// read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
-float MCP3008::readSensor(int adcnum) {
-
-  return readSensorInt(adcnum);
-}
-
-int MCP3008::readSensorInt(int adcnum){
-  if ((adcnum > 7) || (adcnum < 0)) return -1; // Wrong adc address return -1
-
-  // algo
-  digitalWrite(_cspin, HIGH);
-
-  digitalWrite(_clockpin, LOW); //  # start clock low
-  digitalWrite(_cspin, LOW); //     # bring CS low
-
-  int commandout = adcnum;
-  commandout |= 0x18; //  # start bit + single-ended bit
-  commandout <<= 3; //    # we only need to send 5 bits here
- 
-  for (int i=0; i<5; i++) {
-    if (commandout & 0x80) 
-      digitalWrite(_mosipin, HIGH);
-    else   
-      digitalWrite(_mosipin, LOW);
-      
-    commandout <<= 1;
-    digitalWrite(_clockpin, HIGH);
-    digitalWrite(_clockpin, LOW);
-
+uint16_t readMCP(uint8_t channel, int cs){
+  if(channel < 0 || channel > 7){
+    return IOT_FAILURE;
   }
 
-  int adcout = 0;
-  // read in one empty bit, one null bit and 10 ADC bits
-  for (int i=0; i<12; i++) {
-    digitalWrite(_clockpin, HIGH);
-    digitalWrite(_clockpin, LOW);
-    adcout <<= 1;
-    if (digitalRead(_misopin))
-      adcout |= 0x1;
-  } 
-  digitalWrite(_cspin, HIGH);
+  byte one = 0b00000001;
+  byte two = 0b10000000 | (channel << 4);
+  byte three = 0b00000000;
+  byte bytesBack[3];
 
-  adcout >>= 1; //      # first bit is 'null' so drop it
-  return adcout;
+  digitalWrite(cs, LOW);
+
+  SPI.transfer(one);
+  bytesBack[1] = SPI.transfer(two);
+  bytesBack[2] = SPI.transfer(three);
+
+  digitalWrite(cs, HIGH);
+
+  uint16_t output = ((uint16_t)(bytesBack[1] % 4) << 8) | (uint16_t)bytesBack[2];
+
+  return output;
+
 }
