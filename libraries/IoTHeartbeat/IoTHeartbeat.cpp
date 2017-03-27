@@ -5,42 +5,30 @@ IoTHeartbeat::IoTHeartbeat(){
 	usesMCP = false;
 }
 
-IoTHeartbeat::IoTHeartbeat(bool enableMCP, int newChannel){
+IoTHeartbeat::IoTHeartbeat(bool enableMCP, int newChannel, int newcsPin = -1){
 	objectID = HEARTBEAT_ID;
-	usesMCP = enableMCP;
-	channel = newChannel;
+	setupSensor(enableMCP, newChannel, newcsPin);
 }
 
-IoTHeartbeat::IoTHeartbeat(MCP3008* newMCP, int newChannel){
-	objectID = HEARTBEAT_ID;
-	usesMCP = true;
-	mcpPtr = newMCP;
-	channel = newChannel;
-}
 
 int IoTHeartbeat::setupSensor(){
 	return IOT_UNKNOWN;
 }
 
-int IoTHeartbeat::setupSensor(int newChannel){
+int IoTHeartbeat::setupSensor(bool enableMCP, int newChannel, int newcsPin = -1){
+	usesMCP = enableMCP;
 	if(channel > 0){
 		channel = newChannel;
-		return IOT_SUCCESS;	
 	}
-	return IOT_FAILURE;
-}
-
-int IoTHeartbeat::setupSensor(MCP3008* newMCP, int newChannel){
-	mcpPtr = newMCP;
-	channel = newChannel;
+	if(newcsPin > 0){
+		csPin = newcsPin;
+	}
 	return IOT_SUCCESS;
 }
 
-int IoTHeartbeat::readSensor(int newChannel){
+float IoTHeartbeat::readSensor(){
 	if(usesMCP == true){
-		return readADC(channel);
+		return readMCP(channel, csPin);
 	}
 	return analogRead(channel);
-
-	//return ((IoTHeartbeat*)this->*funcptrs[usesMCP])(newChannel);
 }

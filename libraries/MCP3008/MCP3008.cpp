@@ -1,10 +1,21 @@
 #include "MCP3008.h"
 
-uint16_t readMCP(uint8_t channel, int cs){
-  if(channel < 0 || channel > 7){
+int setupMCP3008(int newCS){
+  if(newCS < 0)
     return IOT_FAILURE;
-  }
 
+  pinMode(newCS, OUTPUT);
+  digitalWrite(newCS, HIGH);
+  digitalWrite(newCS, LOW);
+  digitalWrite(newCS, HIGH);
+
+  SPI.begin();
+  SPI.setFrequency(1350000);
+
+  return IOT_UNKNOWN;
+}
+
+uint16_t readMCP(uint8_t channel, int cs){
   byte one = 0b00000001;
   byte two = 0b10000000 | (channel << 4);
   byte three = 0b00000000;
@@ -12,14 +23,12 @@ uint16_t readMCP(uint8_t channel, int cs){
 
   digitalWrite(cs, LOW);
 
-  SPI.transfer(one);
+                 SPI.transfer(one);
   bytesBack[1] = SPI.transfer(two);
   bytesBack[2] = SPI.transfer(three);
 
   digitalWrite(cs, HIGH);
 
-  uint16_t output = ((uint16_t)(bytesBack[1] % 4) << 8) | (uint16_t)bytesBack[2];
-
-  return output;
+  return ( ((uint16_t)(bytesBack[1] % 4) << 8) | bytesBack[2] );
 
 }
