@@ -1,21 +1,27 @@
 #include "MCP3008.h"
 
-int csPin = D8;
+#define CSPIN D8
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   Serial.println();
-  SPI.begin();
-  
-  pinMode(csPin, OUTPUT);
-  digitalWrite(csPin, HIGH);
-  digitalWrite(csPin, LOW);
-  digitalWrite(csPin, HIGH);
+
+  setupMCP3008(CSPIN);
+
+  unsigned long tick = micros();
+  for(int i = 0; i < 65000; i++){
+    readMCP3008(0, CSPIN);
+  }
+  unsigned long tock = micros();
+
+  Serial.println( tock - tick );
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(readMCP(1, csPin));
+  Serial.println(readMCP3008(0, CSPIN));
   delay(100);
+
 }
