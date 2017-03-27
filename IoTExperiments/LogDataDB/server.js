@@ -32,11 +32,17 @@ app.get('/sendData', function(req, res){
 
 });
 app.get('/getData', function(req, res){
-    db.collection('data').find().sort({ts:-1}).limit(10).toArray(function(err3, r3) {
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.write(JSON.stringify(r3));
-    res.end()
-});
+    var info = req.query;
+    var from = parseInt(info.from) || new Date().getTime() - 24*60*60*1000;
+    var int = parseInt(info.int) || 5;
+    int *= 60*60*1000;
+    var to = from + int;
+
+    db.collection('data').find({ts:{$gte:from, $lt:to}}).sort({ts:-1}).toArray(function(err3, r3) {
+      res.writeHead(200, {"Content-Type": "text/plain"});
+      res.write(JSON.stringify(r3));
+      res.end()
+    });
 
 });
 
