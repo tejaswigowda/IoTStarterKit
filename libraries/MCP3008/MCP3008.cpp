@@ -16,7 +16,7 @@ int setupMCP3008(int newCS){
   digitalWrite(newCS, HIGH);
 
   SPI.begin();                                                    //always setFrequency() after SPI.begin()
-  SPI.setFrequency(1350000);
+  SPI.setFrequency(1350000);                                      //1.35mhz when mcp3008 is powered by 2.7V, 3.6mhz when powered by 5V.
 
   return IOT_UNKNOWN;
 }
