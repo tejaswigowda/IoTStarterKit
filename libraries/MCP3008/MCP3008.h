@@ -1,9 +1,9 @@
 /*
-This header file contains functions used to controll the MCP3008 8-channel, 10-bit analog to digital converter.
-The setupMCP3008 function sets speed of the SPI hardware
-The read MCP3008 function interfaces with the device.
-This code is not encapsulated in an object for the sake of speed/efficiency. Therefore, since there is no object containing variables to which these function can refer,
-the functions must be supplied a channel and chip select pin for readings.
+This header file contains functions used to control the MCP3008 8-channel, 10-bit analog to digital converter.
+The setupMCP3008 function sets speed of the SPI hardware.
+The read MCP3008 function interfaces with the device and gets a reading from one channel at a time.
+This code is not encapsulated in an object for the sake of speed. Since there is no object containing variables to which these functions can refer,
+the functions must be supplied channel and chip select parameters.
 
 Phillip Noel
 27-MAR-2017

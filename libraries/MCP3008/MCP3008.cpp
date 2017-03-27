@@ -37,6 +37,6 @@ uint16_t readMCP3008(uint8_t channel, int cs){
 
   digitalWrite(cs, HIGH);                                         //bring cs high when done communicating
 
-  return ( ((uint16_t)(bytesBack[1] % 4) << 8) | bytesBack[2] );  //Output of MCP3008 is Most Significant Bit first (MSB). Need last 2 bits of bytesBack[1] and all 8 bits of bytesBack[2]
+  return ( ((uint16_t)(bytesBack[1] % 4) << 8) | bytesBack[2] );  //output of MCP3008 is Most Significant Bit first (MSB). Need last 2 bits of bytesBack[1] and all 8 bits of bytesBack[2]
 
 }
