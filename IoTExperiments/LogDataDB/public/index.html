@@ -40,7 +40,7 @@ function loadGraph()
 
     for (var i = data.length-1; i>=0; i--){
       var row = data[i];
-      cols[0].push(row.t);
+      cols[0].push((row.t*9)/5 + 32);
       cols[1].push(row.h);
     }
 
