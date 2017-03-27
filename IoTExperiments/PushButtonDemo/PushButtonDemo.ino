@@ -9,7 +9,7 @@
 
 #include "PushButton.h"
 
-PushButton button = PushButton();
+PushButton button = PushButton();                                 //Create object
 int ledPin = 13;
 
 void setup() {
@@ -18,7 +18,7 @@ void setup() {
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
   
-  button.setupSensor(7);
+  button.setupSensor(7);                                          //Setup object
   
   Serial.println(F("setupSensor complete."));
   Serial.print(F("Sensor object id = "));
@@ -29,5 +29,5 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(ledPin, button.readSensor());
+  digitalWrite(ledPin, button.readSensor());                      //Read from object
 }

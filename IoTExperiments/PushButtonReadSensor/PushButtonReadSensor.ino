@@ -1,23 +1,22 @@
+/*
+*     This sketch reads from a PushButton object and, if it is pressed, reads from the IoTDHT11 object.
+*/
+
 #include "IoTDHT11.h"
 #include "PushButton.h"
 
-PushButton pb(D2);
+PushButton pb(D2);                                       //Create sensor objects
 IoTDHT11 dht(D3);
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  delay(10);
 
-  pinMode(D0, OUTPUT);
-  digitalWrite(D0, HIGH);
-  
-  pinMode(D1, OUTPUT);
-  digitalWrite(D1, HIGH);
-
-  pb.setupSensor();
+  pb.setupSensor();                                       //Setup Sensor objects
   dht.setupSensor();
   
-  Serial.print(F("Pushbutton sensor id: \t"));
+  Serial.print(F("\nPushbutton sensor id: \t"));          //Print sensor IDs
   Serial.println(pb.getObjectID());
   Serial.print(F("DHT11 sensor id: \t"));
   Serial.println(dht.getObjectID());
@@ -27,11 +26,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if(pb.readSensor() == HIGH){
+  if(pb.readSensor() == HIGH){                            //If the PushButton is pressed then read the IoTDHT11
     
     Serial.print(F("The temperature is: \t"));
     Serial.print(dht.readSensor(TEMPERATURE));
-    Serial.println(F(" degrees celsius."));
+    Serial.println(F(" C."));
     
     Serial.print(F("The humidity is: \t"));
     Serial.print(dht.readSensor(HUMIDITY));

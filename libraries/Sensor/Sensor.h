@@ -7,7 +7,7 @@ Phillip Noel
 #if !defined(SENSOR_H)
 #define SENSOR_H
 
-#include "Peripheral.h"
+#include "IoTStarterKit.h"
 
 
 #if ARDUINO >= 100
@@ -21,7 +21,7 @@ Phillip Noel
 
 class Sensor{
 protected:
-	  		int objectID;
+	  		int   objectID;
 
 public:
 		    	  Sensor(		void);
