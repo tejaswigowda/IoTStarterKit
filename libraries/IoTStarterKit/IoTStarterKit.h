@@ -1,4 +1,8 @@
 /*
+This header file contains definitions used in the IoTStarterKit. These are in one place, rather than in respective folders
+to more easily prevent naming conflicts
+
+
 Phillip Noel
 05-January-2017
 */
@@ -7,13 +11,40 @@ Phillip Noel
 #if !defined(IOTSTARTERKIT_H)
 #define IOTSTARTERKIT_H
 
-#define IOT_SUCCESS  	0
-#define IOT_FAILURE    -1
-#define IOT_UNKNOWN    -1
+/*
+DO NOT use "index" (sans quotes) in sketches using the NodeMCU. "index" is used somewhere in the esp core and the compiler will return a "redefinition" error.
+*/
 
-#define SENSOR_ID 	    0
-#define PUSHBUTTON_ID 	1
-#define DHT11_ID 		2
-#define HEARTBEAT_ID    3
+#define IOT_SUCCESS  		0
+#define IOT_FAILURE        -1
+#define IOT_UNKNOWN    	   -1
+
+#define SENSOR_ID 	   	   -1
+#define CONTROLLER_ID		1
+
+#define PUSHBUTTON_ID 		2
+#define DHT11_ID 			3
+#define HEARTBEAT_ID    	4
+#define POTENTIOMETER_ID 	6
+
+#define RGB_LED_ID			5
+
+
+#define DHT_HUMIDITY 	false
+#define DHT_TEMPERATURE true
+
+#define RGB_RED 	255, 0, 0
+#define RGB_ORANGE  255, 150, 0
+#define RGB_YELLOW 	150, 255, 0
+#define RGB_GREEN 	0, 255, 0
+#define RGB_BLUE 	0, 255, 0
+#define RGB_INDIGO  0, 150, 255
+#define RGB_VIOLET 	255, 0, 255
+#define RGB_WHITE 	150, 255, 255
+#define RGB_OFF		0, 0, 0
+
+#define POT_RAW 		 0
+#define POT_SYMMETRICAL  1
+#define POT_ASYMMETRICAL 2
 
 #endif

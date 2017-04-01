@@ -1,7 +1,7 @@
 #include "IoTDHT11.h"
 
 
-IoTDHT11::IoTDHT11() : dhtsensor(readPin, DHT11, 30) {
+IoTDHT11::IoTDHT11() : dhtsensor(readPin, DHT11, 30) {						//use 30 for esp8266?
 	objectID = DHT11_ID;
 }
 

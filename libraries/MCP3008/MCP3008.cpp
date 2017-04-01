@@ -4,6 +4,7 @@ This file contains the implementations of the functions inside "MCP3008.h"
 Phillip Noel
 27-MAR-2017
 */
+
 #include "MCP3008.h"
 
 int setupMCP3008(int newCS){
@@ -16,7 +17,11 @@ int setupMCP3008(int newCS){
   digitalWrite(newCS, HIGH);
 
   SPI.begin();                                                    //always setFrequency() after SPI.begin()
-  SPI.setFrequency(1350000);                                      //1.35mhz when mcp3008 is powered by 2.7V, 3.6mhz when powered by 5V.
+
+#if ARDUINO < 100
+ SPI.setFrequency(1350000);                                      //1.35mhz when mcp3008 is powered by 2.7V, 3.6mhz when powered by 5V. Arduino Uno default SPI speed is compatible.
+#endif
+  
 
   return IOT_UNKNOWN;
 }

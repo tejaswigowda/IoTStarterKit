@@ -5,6 +5,8 @@ The read MCP3008 function interfaces with the device and gets a reading from one
 This code is not encapsulated in an object for the sake of speed. Since there is no object containing variables to which these functions can refer,
 the functions must be supplied channel and chip select parameters.
 
+Remeber to setupMCP3008() before first use in program!!!
+
 Phillip Noel
 27-MAR-2017
 */

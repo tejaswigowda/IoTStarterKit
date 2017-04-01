@@ -17,6 +17,9 @@ int IoTHeartbeat::setupSensor(){
 
 int IoTHeartbeat::setupSensor(bool enableMCP, int newChannel, int newcsPin = -1){
 	usesMCP = enableMCP;
+	if(usesMCP == true){
+		setupMCP3008(csPin);
+	}
 	if(channel > 0){
 		channel = newChannel;
 	}

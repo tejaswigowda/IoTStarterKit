@@ -8,7 +8,7 @@ int	Sensor::setupSensor(){
 	  return IOT_UNKNOWN;
 }
 
-float	Sensor::readSensor(){
+float Sensor::readSensor(){
 	  return NAN;
 }
 

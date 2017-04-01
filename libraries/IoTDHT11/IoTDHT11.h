@@ -13,9 +13,6 @@ Phillip Noel
 #include "Sensor.h"
 #include "DHT.h"
 
-#define HUMIDITY 	false
-#define TEMPERATURE true
-
 class IoTDHT11 : public Sensor{
 protected:
 	uint8_t   	readPin = -1; 		//-1 by default to force user to specify the readPin
