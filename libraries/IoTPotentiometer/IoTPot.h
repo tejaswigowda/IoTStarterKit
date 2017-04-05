@@ -8,21 +8,21 @@ Phillip Noel
 01-APR-2017
 */
 
-#if !defined (B10K_POT_H)
-#define B10K_POT_H
+#if !defined (IOT_POT_H)
+#define IOT_POT_H
 
 #include "Sensor.h"
 #include "MCP3008.h"
 #include "IoTKitUtils.h"
 
-class B10k_Pot : public Sensor{
+class IoTPot : public Sensor{
 private:
 	bool usesMCP;
 	int  csPin;
 	int  channel;
 
 public:
-	B10k_Pot();								//default setup
+	IoTPot();								//default setup
 
 	int setupSensor();						//default setupSensor (can be invoked more than once)
 	int setupSensor(bool, int, int);		//supply usesMCP (which ADC to use) and analog input channel used in either case

@@ -1,1 +1,3 @@
 # IoTStarterKit
+
+#The IoTStarterKit Libraries are designed to be used with the NodeMCU included in the kit. They are generic enough to be used with other MCUs, however, some libraries implement virtual functions that take no input parameters and those functions therefore assume a user is using the NodeMCU. For example, the B10k_Pot object represents an analog sensor and implements the setupSensor() function declared in Sensor.h. Because this function takes no parameters, the object defaults to using the only analog input pin on the NodeMCU, A0. The B10k_Pot object also has a setupSensor(bool usesMCP, int channel, int csPin) function, which other boards not included in the IoTStarterKIt can use.

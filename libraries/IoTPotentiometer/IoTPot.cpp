@@ -1,17 +1,17 @@
-#include "B10k_Pot.h"
+#include "IoTPot.h"
 
-B10k_Pot::B10k_Pot(){
+IoTPot::IoTPot(){
 	objectID = POTENTIOMETER_ID;
 
 }
 
-int B10k_Pot::setupSensor(){ 		//when no parameters supplied, assume user is using NodeMCU without the MCP3008 (meaning they will use the only ADC channel on the board, A0)			
+int IoTPot::setupSensor(){ 		//when no parameters supplied, assume user is using NodeMCU without the MCP3008 (meaning they will use the only ADC channel on the board, A0)			
 	usesMCP = false;
 	channel = A0;
 	return IOT_FAILURE;
 }
 
-int B10k_Pot::setupSensor(bool newUsesMCP, int newChannel, int newCSPin = -1){
+int IoTPot::setupSensor(bool newUsesMCP, int newChannel, int newCSPin = -1){
 	if(newChannel < 0 || newChannel > 7 || newCSPin < 0){
 		return IOT_FAILURE;
 	}
@@ -27,11 +27,11 @@ int B10k_Pot::setupSensor(bool newUsesMCP, int newChannel, int newCSPin = -1){
 	return IOT_SUCCESS;
 }
 
-float B10k_Pot::readSensor(){
+float IoTPot::readSensor(){
 	return readSensorInt();
 }
 
-float B10k_Pot::readSensor(int mode){
+float IoTPot::readSensor(int mode = POT_RAW){
 	int reading;
 	if(usesMCP == true){
 		reading = readMCP3008(channel, csPin);
@@ -50,10 +50,10 @@ float B10k_Pot::readSensor(int mode){
 		return IoTKitUtils::mapIntToFloat(reading, 0, 1023, 0, 300);
 	}
 
-	return NAN;
+	return reading;
 }
 
-int B10k_Pot::readSensorInt(){
+int IoTPot::readSensorInt(){
 	int reading;
 
 	if(usesMCP == true){

@@ -24,10 +24,10 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.print(F("Temperature (Celsius): \t"));   //Read from the object
-  Serial.println(dht.readSensor(TEMPERATURE));
+  Serial.println(dht.readSensor(DHT_TEMPERATURE));
   
   Serial.print(F("Humidity (% humidity): \t"));
-  Serial.println(dht.readSensor(HUMIDITY));
+  Serial.println(dht.readSensor(DHT_HUMIDITY));
   delay(1000);
 
 }

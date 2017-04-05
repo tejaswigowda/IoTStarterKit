@@ -53,11 +53,11 @@ void loop() {
     readSchedule += readDelay;
 
     Serial.print(F("The temperature is:\t")); //Read from sensors (and save data) immedately
-    Serial.print(temperature = dht.readSensor(TEMPERATURE));
+    Serial.print(temperature = dht.readSensor(DHT_TEMPERATURE));
     Serial.println(F(" C."));
     
     Serial.print(F("The humidity is:\t"));  
-    Serial.print(humidity = dht.readSensor(HUMIDITY));
+    Serial.print(humidity = dht.readSensor(DHT_HUMIDITY));
     Serial.println(F("%."));  
      
     WiFiClient client;                        // Use WiFiClient class to create TCP connections

@@ -18,7 +18,7 @@ int setupMCP3008(int newCS){
 
   SPI.begin();                                                    //always setFrequency() after SPI.begin()
 
-#if ARDUINO < 100
+#if defined(ESP8266)
  SPI.setFrequency(1350000);                                      //1.35mhz when mcp3008 is powered by 2.7V, 3.6mhz when powered by 5V. Arduino Uno default SPI speed is compatible.
 #endif
   

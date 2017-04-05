@@ -28,6 +28,7 @@ DO NOT use "index" (sans quotes) in sketches using the NodeMCU. "index" is used 
 #define POTENTIOMETER_ID 	6
 
 #define RGB_LED_ID			5
+#define STEPPER_ID			7
 
 
 #define DHT_HUMIDITY 	false
@@ -46,5 +47,11 @@ DO NOT use "index" (sans quotes) in sketches using the NodeMCU. "index" is used 
 #define POT_RAW 		 0
 #define POT_SYMMETRICAL  1
 #define POT_ASYMMETRICAL 2
+
+#define USESMCP true
+#define NOMCP 	false
+
+#define STEPPER_COUNTERCLOCKWISE 	false
+#define STEPPER_CLOCKWISE 			true
 
 #endif

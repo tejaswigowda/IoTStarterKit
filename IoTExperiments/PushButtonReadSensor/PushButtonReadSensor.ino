@@ -29,11 +29,11 @@ void loop() {
   if(pb.readSensor() == HIGH){                            //If the PushButton is pressed then read the IoTDHT11
     
     Serial.print(F("The temperature is: \t"));
-    Serial.print(dht.readSensor(TEMPERATURE));
+    Serial.print(dht.readSensor(DHT_TEMPERATURE));
     Serial.println(F(" C."));
     
     Serial.print(F("The humidity is: \t"));
-    Serial.print(dht.readSensor(HUMIDITY));
+    Serial.print(dht.readSensor(DHT_HUMIDITY));
     Serial.println(F("%\n"));
   }//if
   delay(100);

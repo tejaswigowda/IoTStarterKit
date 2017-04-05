@@ -3,26 +3,18 @@
 */
 
 #include <ESP8266WiFi.h>
-#include "IoTDHT11.h"
 
 const char* ssid      = "Cartel";             //Wifi network info
 const char* password  = "Espresso";
 
 const char* host      = "34.196.139.141";     //IP address of host
 
-unsigned long wait    = 10000;                //Time period to connect to host
+unsigned long wait    = 1000;                 //Time period to connect to host
 unsigned long timeout = 5000;                 //Timeout interval for connection to host
-
-float temperature;                            //Store readings from IoTDHT11 in variables so you only read from sensor once in a loop
-uint8_t humidity;
-IoTDHT11 dht(2);
 
 void setup() {
   Serial.begin(115200);
   delay(10);                                  //delay(10) so the Serial monitor does not prinbt garble
-
-
-  dht.setupSensor();                          //Setup DHT11 Sensor object
 
   Serial.print(F("Connecting to "));          //Begin by connecting to wifi network
   Serial.println(ssid);
@@ -42,17 +34,20 @@ void setup() {
 unsigned long schedule = millis();            //Use a loop on a schedule. Do not use delay()! (delay() will cause your program to "drift").
 unsigned long timeoutSchedule;                //This is a nested schedule for responses from the host. (If the host does not respon in timeout millis from time of sending then move on).
 
+int currentPin;
 void loop() {
   if (millis() > schedule) {                  //Pass through if the current time is not greater than the schedule time.
     schedule += wait;
 
-    Serial.print(F("The temperature is:\t")); //Read from sensors (and save data) immedately
-    Serial.print(temperature = dht.readSensor(DHT_TEMPERATURE));
-    Serial.println(F(" C."));
+    //scan pins and create string here
+    //================================
+    String pinStates;
+    pinStates += "?IO"; pinStates += currentPin; pinStates += "=1";
+    digitalWrite(currentPin, HIGH);
+    delay(1000);
+    digitalWrite(currentPin, LOW);
     
-    Serial.print(F("The humidity is:\t"));  
-    Serial.print(humidity = dht.readSensor(DHT_HUMIDITY));
-    Serial.println(F("%."));  
+    Serial.println(pinStates);
      
     WiFiClient client;                        // Use WiFiClient class to create TCP connections
     const int httpPort = 8080;
@@ -62,10 +57,7 @@ void loop() {
     }
     
     String url = "/sendData";                 // We now create a URL for the request
-    url += "?t=";
-    url += String(temperature);
-    url += "&h=";
-    url += String(humidity);
+    url += pinStates;
     url += "&key=";
     url += "15974c1d771020e5";
     
