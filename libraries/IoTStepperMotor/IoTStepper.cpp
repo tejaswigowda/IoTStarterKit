@@ -25,7 +25,7 @@ int IoTStepper::setupController(int newA, int newB, int newC, int newD){			//set
 	pinMode(D, OUTPUT);
 
 	digitalWrite(A, HIGH);
-	digitalWrite(B, HIGH);
+	digitalWrite(B, LOW);
 	digitalWrite(C, LOW);
 	digitalWrite(D, LOW);
 
@@ -33,7 +33,7 @@ int IoTStepper::setupController(int newA, int newB, int newC, int newD){			//set
 }
 
 int IoTStepper::rotate(float steps, bool newDirection, int newWaitInterval){		//negative number of steps is counterclockwise.
-	if(setMotion(steps, direction, newWaitInterval) != IOT_SUCCESS){
+	if(setMotion(steps, newDirection, newWaitInterval) != IOT_SUCCESS){
 		return IOT_FAILURE;
 	}
 
@@ -69,30 +69,40 @@ int IoTStepper::setMotion(float steps, bool newDirection, int newWaitInterval){	
 }
 
 int IoTStepper::update(){
-	if(currentPos == desiredPos){													//return success if stepper is at desired position
+	static unsigned long currentTime, nextStepTime;
+	static uint8_t currentPhase, nextPhase;
+  	static int currentPin;
+
+	if(currentPos == (unsigned long)desiredPos){									//return success if stepper is at desired position
 		return IOT_SUCCESS;
 	}
 
 	currentTime = millis();															//check the time and break if it is not time to move the stepper
 	if(currentTime < nextStepTime)
 		return IOT_UNKNOWN;
-
 	nextStepTime += waitInterval;													//update the schedule for the next step
 
-	/*
-	static uint32_t currentPhase;													//decide which pins to toggle to step the motor and update current pos
-  	static uint32_t nextPhase;
-  	static int currentPin;
-  
-  	currentPhase++;
-  	nextPhase = currentPhase + 1;
+	
+	currentPhase = currentPos % 8;
+	currentPos += (direction == true) ? 1 : -1;
+  	nextPhase = currentPos % 8;
 
-  	Serial.println(phases[currentPhase%8]^phases[nextPhase%8]);
-  
-  	currentPin = pins[phases[currentPhase%8]^phases[nextPhase%8]];
-  	digitalWrite(currentPin, !digitalRead(currentPin));
+  	//Serial.print(currentPhase);
+  	//Serial.print(", ");
+  	//Serial.println(nextPhase);
 
-  	*/
+  	//Serial.println(phases[currentPhase], BIN);
+  	//Serial.println(phases[nextPhase], BIN);
+  
+  	currentPin = phases[currentPhase]^phases[nextPhase];
+  	//Serial.print(currentPin);
+  	//Serial.print(", ");
+  	//Serial.println(pins[currentPin]);
+  	//Serial.println();
+  	digitalWrite(pins[currentPin], !digitalRead(pins[currentPin]));
+
+  	
+
 
 	return IOT_UNKNOWN;																//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
