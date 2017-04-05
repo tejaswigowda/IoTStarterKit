@@ -3,6 +3,7 @@
 IoTStepper s1;
 
 void setup() {
+  pinMode(13, OUTPUT);
   Serial.begin(115200);
   Serial.println();
   Serial.print("IoTStepper objectID: \t");
@@ -12,26 +13,30 @@ void setup() {
   s1.setupController(2, 3, 4, 5);
   Serial.println("Setup complete.");
 
-  Serial.println("Now rotating stepper counterclockwise by 360 degrees...");
+  Serial.println("Now rotating stepper counterclockwise then clockwise at different speed...");
   delay(1000);
-  s1.rotate(4096, STEPPER_CLOCKWISE, 5);
-  Serial.println("Complete. Now setting paramters for motor to run indefinitely. It will be \"updated\" in loop()...");
-  s1.setMotion(INFINITY, STEPPER_CLOCKWISE, 2);
-  Serial.println("Complete. Now entering loop.");
+  s1.rotate(1000, STEPPER_COUNTERCLOCKWISE, 5);
+  s1.rotate(1000, STEPPER_CLOCKWISE, 1);
+
+  s1.setMotion(INFINITY, STEPPER_COUNTERCLOCKWISE, 1);
 
 }
 
+unsigned long currentTime;
+unsigned long next;
+unsigned long randomdelay = millis() + 30000;
 void loop() {
-  // put your main code here, to run repeatedly:
-  static unsigned long nextPrint;
-  static unsigned long currentTime;
-
   currentTime = millis();
-  if(currentTime > nextPrint){
-    nextPrint += 500;
-    Serial.println("task switching is awesome!");
+  if(currentTime > next){
+    digitalWrite(13, !digitalRead(13));
+    next += 500;
+    Serial.println("taskSwitchingisawesome!");    
   }
-
+  if(millis() > randomdelay){
+    delay(3000);
+    randomdelay = 5000000;
+  }
   s1.update();
+  delayMicroseconds(100);
 
 }

@@ -60,7 +60,10 @@ int IoTStepper::setMotion(float steps, bool newDirection, int newWaitInterval){	
 		desiredPos = INFINITY;
 	}
 	else{
-		desiredPos = (steps < 0) ? (-1 * steps) : steps;	
+		desiredPos = (steps < 0) ? (-1 * steps) : steps;
+		if(newDirection == false){
+			desiredPos *= -1;
+		}	
 	}
 
 	currentPos = 0;
@@ -73,9 +76,12 @@ int IoTStepper::update(){
 	static uint8_t currentPhase, nextPhase;
   	static int currentPin;
 
-	if(currentPos == (unsigned long)desiredPos){									//return success if stepper is at desired position
-		return IOT_SUCCESS;
-	}
+  	if(desiredPos != INFINITY){
+	  	if(currentPos == (unsigned long)desiredPos){									//return success if stepper is at desired position
+			return IOT_SUCCESS;
+		}
+  	}
+	
 
 	currentTime = millis();															//check the time and break if it is not time to move the stepper
 	if(currentTime < nextStepTime)
