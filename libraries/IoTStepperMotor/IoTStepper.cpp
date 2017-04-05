@@ -83,10 +83,10 @@ int IoTStepper::update(){
   	}
 	
 
-	currentTime = millis();															//check the time and break if it is not time to move the stepper
+	currentTime = millis();																//check the time and break if it is not time to move the stepper
 	if(currentTime < nextStepTime)
 		return IOT_UNKNOWN;
-	nextStepTime += waitInterval;													//update the schedule for the next step
+	nextStepTime += waitInterval;														//update the schedule for the next step
 
 	
 	currentPhase = currentPos % 8;
@@ -110,7 +110,7 @@ int IoTStepper::update(){
   	
 
 
-	return IOT_UNKNOWN;																//return success when desired number of step (signals) have been made (we get no feedback from motor)
+	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
 
 unsigned long IoTStepper::getCurrentPos(){
