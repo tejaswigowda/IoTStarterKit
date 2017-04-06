@@ -24,7 +24,7 @@ int IoTStepper::setupController(uint8_t newA, uint8_t newB, uint8_t newC, uint8_
 	pinMode(C, OUTPUT);
 	pinMode(D, OUTPUT);
 
-	digitalWrite(A, HIGH);
+	digitalWrite(A, HIGH);																			//The initial state must be 1000!
 	digitalWrite(B, LOW);
 	digitalWrite(C, LOW);
 	digitalWrite(D, LOW);
@@ -32,7 +32,7 @@ int IoTStepper::setupController(uint8_t newA, uint8_t newB, uint8_t newC, uint8_
 	return IOT_SUCCESS;
 }
 
-int IoTStepper::rotate(float steps, bool newDirection, uint32_t newWaitInterval){		//negative number of steps is counterclockwise.
+int IoTStepper::rotate(float steps, bool newDirection, uint32_t newWaitInterval){
 	if(setMotion(steps, newDirection, newWaitInterval) != IOT_SUCCESS){
 		return IOT_FAILURE;
 	}
@@ -42,10 +42,10 @@ int IoTStepper::rotate(float steps, bool newDirection, uint32_t newWaitInterval)
 		delayMicroseconds(20);
 	}
 
-	return IOT_SUCCESS;																//return unknown here because the stepper returns no feedback
+	return IOT_SUCCESS;
 }
 
-int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterval){		//negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
+int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterval){ //negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
 	if(newWaitInterval < 0)
 		return IOT_FAILURE;
 	waitInterval = newWaitInterval;
@@ -60,7 +60,7 @@ int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterv
 		desiredPos = INFINITY;
 	}
 	else{
-		desiredPos = (steps < 0) ? (-1 * steps) : steps;
+		desiredPos = (steps < 0) ? (-1 * steps) : steps;							//desiredPos is negative if the stepper should rotate CCW
 		if(newDirection == false){
 			desiredPos *= -1;
 		}	
