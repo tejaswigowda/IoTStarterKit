@@ -4,7 +4,7 @@ IoTStepper::IoTStepper(){
 	objectID = STEPPER_ID;
 }
 
-int IoTStepper::setupController(int newA, int newB, int newC, int newD){			//set pin modes, define pins in "pins" array (using bitwise ops), and digitWrite into starting position
+int IoTStepper::setupController(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t newD){			//set pin modes, define pins in "pins" array (using bitwise ops), and digitWrite into starting position
 	if(A < 0 || B < 0 | C < 0 || D < 0){
 		return IOT_FAILURE;
 	}
@@ -32,20 +32,20 @@ int IoTStepper::setupController(int newA, int newB, int newC, int newD){			//set
 	return IOT_SUCCESS;
 }
 
-int IoTStepper::rotate(float steps, bool newDirection, int newWaitInterval){		//negative number of steps is counterclockwise.
+int IoTStepper::rotate(float steps, bool newDirection, uint32_t newWaitInterval){		//negative number of steps is counterclockwise.
 	if(setMotion(steps, newDirection, newWaitInterval) != IOT_SUCCESS){
 		return IOT_FAILURE;
 	}
 
 	while(update() != IOT_SUCCESS){
 		//do nothing. wait for rotation to complete
-		delayMicroseconds(100);
+		delayMicroseconds(20);
 	}
 
 	return IOT_SUCCESS;																//return unknown here because the stepper returns no feedback
 }
 
-int IoTStepper::setMotion(float steps, bool newDirection, int newWaitInterval){		//negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
+int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterval){		//negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
 	if(newWaitInterval < 0)
 		return IOT_FAILURE;
 	waitInterval = newWaitInterval;
@@ -83,7 +83,7 @@ int IoTStepper::update(){
   	}
 	
 
-	currentTime = millis();																//check the time and break if it is not time to move the stepper
+	currentTime = micros();																//check the time and break if it is not time to move the stepper
 	if(currentTime < nextStepTime)
 		return IOT_UNKNOWN;
 	nextStepTime += waitInterval;														//update the schedule for the next step

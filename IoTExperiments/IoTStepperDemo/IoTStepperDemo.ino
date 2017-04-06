@@ -15,10 +15,10 @@ void setup() {
 
   Serial.println("Now rotating stepper counterclockwise then clockwise at different speed...");
   delay(1000);
-  s1.rotate(1000, STEPPER_COUNTERCLOCKWISE, 5);
-  s1.rotate(1000, STEPPER_CLOCKWISE, 1);
+  s1.rotate(1000, STEPPER_COUNTERCLOCKWISE, 5000);
+  s1.rotate(1000, STEPPER_CLOCKWISE, 1000);
 
-  s1.setMotion(INFINITY, STEPPER_COUNTERCLOCKWISE, 1);
+  s1.setMotion(INFINITY, STEPPER_COUNTERCLOCKWISE, 1000);
 
 }
 
