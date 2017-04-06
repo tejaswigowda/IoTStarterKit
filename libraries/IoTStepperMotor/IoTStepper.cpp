@@ -92,27 +92,25 @@ int IoTStepper::update(){
 	currentPhase = currentPos % 8;
 	currentPos += (direction == true) ? 1 : -1;
   	nextPhase = currentPos % 8;
-
-  	//Serial.print(currentPhase);
-  	//Serial.print(", ");
-  	//Serial.println(nextPhase);
-
-  	//Serial.println(phases[currentPhase], BIN);
-  	//Serial.println(phases[nextPhase], BIN);
   
   	currentPin = phases[currentPhase]^phases[nextPhase];
-  	//Serial.print(currentPin);
-  	//Serial.print(", ");
-  	//Serial.println(pins[currentPin]);
-  	//Serial.println();
+
   	digitalWrite(pins[currentPin], !digitalRead(pins[currentPin]));
-
-  	
-
 
 	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
 
 unsigned long IoTStepper::getCurrentPos(){
 	return currentPos;
+}
+
+int IoTStepper::end(){																	//if this function is invoked then setupController must be invoked again!
+	digitalWrite(A, LOW);
+	digitalWrite(B, LOW);
+	digitalWrite(C, LOW);
+	digitalWrite(D, LOW);
+
+	desiredPos = 0;
+
+	return IOT_SUCCESS;
 }

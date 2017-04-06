@@ -30,7 +30,7 @@ void loop() {
   if(currentTime > next){
     digitalWrite(13, !digitalRead(13));
     next += 500;
-    Serial.println("taskSwitchingisawesome!");    
+    Serial.println(millis());    
   }
   if(millis() > randomdelay){
     delay(3000);

@@ -33,6 +33,8 @@ public:
 	int 	update();
 
 	unsigned long getCurrentPos();
+
+	int 	end();														//if this is invoked then setupController() must be called again!!
 };
 
 #endif
