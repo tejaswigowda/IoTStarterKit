@@ -87,7 +87,6 @@ int IoTStepper::update(){
 	if(currentTime < nextStepTime)
 		return IOT_UNKNOWN;
 	nextStepTime += waitInterval;														//update the schedule for the next step
-
 	
 	currentPhase = currentPos % 8;
 	currentPos += (direction == true) ? 1 : -1;
@@ -96,6 +95,9 @@ int IoTStepper::update(){
   	currentPin = phases[currentPhase]^phases[nextPhase];
 
   	digitalWrite(pins[currentPin], !digitalRead(pins[currentPin]));
+
+  	if(nextStepTime < 4294967295 && nextStepTime > (4294967295 - waitInterval))			//this handles program counter overflow
+		nextStepTime += waitInterval;
 
 	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
