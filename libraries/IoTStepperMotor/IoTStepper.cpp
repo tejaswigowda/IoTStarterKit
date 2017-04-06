@@ -88,13 +88,13 @@ int IoTStepper::update(){
 		return IOT_UNKNOWN;
 	nextStepTime += waitInterval;														//update the schedule for the next step
 	
-	currentPhase = currentPos % 8;
-	currentPos += (direction == true) ? 1 : -1;
+	currentPhase = currentPos % 8;														//the stepper has 8 different states
+	currentPos += (direction == true) ? 1 : -1;											//increment or decrement position according to direction
   	nextPhase = currentPos % 8;
   
   	currentPin = phases[currentPhase]^phases[nextPhase];
 
-  	digitalWrite(pins[currentPin], !digitalRead(pins[currentPin]));
+  	digitalWrite(pins[currentPin], !digitalRead(pins[currentPin]));						//only one pin changes between each consecutive state
 
   	if(nextStepTime < 4294967295 && nextStepTime > (4294967295 - waitInterval))			//this handles program counter overflow
 		nextStepTime += waitInterval;
