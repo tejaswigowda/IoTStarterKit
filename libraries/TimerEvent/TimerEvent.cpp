@@ -9,7 +9,7 @@ TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void 
 	}
 	scheduledTime = start;														//set the start time for TimerEvent (in case user wants to wait to start timer, or synchronize all TimerEvent instances)
 	timeInterval = newTimeInterval;						
-	callbackFunction = newCallbackFunction;
+	callbackFunction = newCallbackFunction;										//every callback function must take no parameters and return nothing!
 }
 
 int TimerEvent::refresh(){

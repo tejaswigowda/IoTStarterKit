@@ -4,10 +4,9 @@
 #include "Event.h"
 
 class TimerEvent : public Event{
-private:
+protected:
 	unsigned long scheduledTime, timeInterval;								//used to compare current time to scheduled time of callback
 	unsigned long (*getTime)(void);											//set a pointer to address of micro() or millis() so we don't have to check a condition each pass through loop
-	void (*callbackFunction)(void);											//all callback functions must take no parameters and return nothng
 
 public:
 	TimerEvent(unsigned long, unsigned long, void (*)(void), bool);			//starting time, time interval, callback function, and uses millis/micros

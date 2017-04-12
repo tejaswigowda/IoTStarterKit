@@ -11,9 +11,11 @@
 
 
 class Event{
+protected:
+	void (*callbackFunction)(void);	//every callback function must take no paramteres and return nothing!
 public:
-				Event();
-	virtual int refresh();
+				Event();			//constructor
+	virtual int refresh();			//Every Event should be able to refresh (and invoke a callback);
 };
 
 
