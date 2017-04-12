@@ -6,21 +6,21 @@ Phillip Noel
 06-January-2017
 */
 
-#if !defined(IOT_DHT11_H)
-#define IOT_DHT11_H
+#if !defined(IOT_DHT22_H)
+#define IOT_DHT22_H
 
 
 #include "Sensor.h"
 #include "DHT.h"
 
-class IoTDHT11 : public Sensor{
+class IoTDHT22 : public Sensor{
 protected:
 	uint8_t   	readPin = -1; 		//-1 by default to force user to specify the readPin
 	DHT   		dhtsensor;
 
 public:
-          		IoTDHT11( void);
-      	  		IoTDHT11(  int);
+          		IoTDHT22( void);
+      	  		IoTDHT22(  int);
 	int   		setReadPin(int);
 
 	//inherited from Sensor.h

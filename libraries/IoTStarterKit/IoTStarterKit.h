@@ -24,6 +24,7 @@ DO NOT use "index" (sans quotes) in sketches using the NodeMCU. "index" is used 
 
 #define PUSHBUTTON_ID 		2
 #define DHT11_ID 			3
+#define DHT22_ID			8
 #define HEARTBEAT_ID    	4
 #define POTENTIOMETER_ID 	6
 
@@ -53,5 +54,8 @@ DO NOT use "index" (sans quotes) in sketches using the NodeMCU. "index" is used 
 
 #define STEPPER_COUNTERCLOCKWISE 	false
 #define STEPPER_CLOCKWISE 			true
+
+#define MILLIS true
+#define MICROS false
 
 #endif
