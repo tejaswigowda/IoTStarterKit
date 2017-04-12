@@ -12,7 +12,7 @@ Phillip Noel
 #define IOTSTARTERKIT_H
 
 /*
-DO NOT use "index" (sans quotes) in sketches using the NodeMCU. "index" is used somewhere in the esp core and the compiler will return a "redefinition" error.
+DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "index" is used somewhere in the esp core and the compiler will return a "redefinition" error.
 */
 
 #define IOT_SUCCESS  		0

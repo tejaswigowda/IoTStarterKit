@@ -14,7 +14,7 @@ TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void 
 
 int TimerEvent::refresh(){
 
-	if((unsigned long)(getTime() - scheduledTime) > timeInterval){				//getTime() is the function pointer to millis()/micros()
+	if((unsigned long)(getTime() - scheduledTime) > timeInterval){				//getTime() is the function pointer to millis()/micros(). THIS CONDITION STATEMENT WILL HANDLE ROLLOVER (overflow)
 		scheduledTime += timeInterval;											//update schedule
 		(*callbackFunction)();													//perform callback
 		return IOT_SUCCESS;														//return success if event occurred

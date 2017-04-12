@@ -1,3 +1,11 @@
+/*
+This header file define the interface for Event type objects. All events must be able to refresh and invoke a callback function
+when a specified event occurs.
+
+Phillip Noel
+12-APR-2017
+*/
+
 #if !defined(EVENT_H)
 #define EVENT_H
 

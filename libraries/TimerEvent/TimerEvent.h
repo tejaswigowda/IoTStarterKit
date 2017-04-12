@@ -1,3 +1,12 @@
+/*
+This header defines a a TimerEvent. TimerEvents inherit from the Event.h object. When refreshed they check
+the system time and compare it to a scheduled time. If some time interval has elapsed then the task schedule
+is updated and th callback function is invoked.
+
+Phillip Noel
+12-APR-2017
+*/
+
 #if !defined(TIMER_EVENT_H)
 #define TIMER_EVENT_H
 
