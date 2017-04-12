@@ -1,5 +1,5 @@
 /*
-This header file define the interface for Event type objects. All events must be able to refresh and invoke a callback function
+This header file defines the interface for Event type objects. All Events must be able to refresh and invoke a callback function
 when a specified event occurs.
 
 Phillip Noel
@@ -23,7 +23,7 @@ protected:
 	void (*callbackFunction)(void);	//every callback function must take no paramteres and return nothing!
 public:
 				Event();			//constructor
-	virtual int refresh();			//Every Event should be able to refresh (and invoke a callback);
+	virtual int refresh();			//Every Event should be able to refresh (and invoke a callback)
 };
 
 

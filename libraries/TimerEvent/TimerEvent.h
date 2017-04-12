@@ -18,7 +18,7 @@ protected:
 	unsigned long (*getTime)(void);											//set a pointer to address of micro() or millis() so we don't have to check a condition each pass through loop
 
 public:
-	TimerEvent(unsigned long, unsigned long, void (*)(void), bool);			//starting time, time interval, callback function, and uses millis/micros
+	TimerEvent(unsigned long, unsigned long, void (*)(void), bool);			//starting time, time interval, callback function, and uses millis()/micros()
 
 	int refresh();															//check if time event has occurred and invoke callback
 

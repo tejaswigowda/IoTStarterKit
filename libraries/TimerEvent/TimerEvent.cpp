@@ -8,7 +8,7 @@ TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void 
 		getTime = &micros;
 	}
 	scheduledTime = start;														//set the start time for TimerEvent (in case user wants to wait to start timer, or synchronize all TimerEvent instances)
-	timeInterval = newTimeInterval;						
+	timeInterval = newTimeInterval;												//set the "delay"	
 	callbackFunction = newCallbackFunction;										//every callback function must take no parameters and return nothing!
 }
 

@@ -16,7 +16,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  static TimerEvent te = TimerEvent(millis(), 500, &toggleLED, MILLIS);
+  static unsigned long currentTime = millis();
+  static TimerEvent te = TimerEvent(currentTime, 500, &toggleLED, MILLIS);
   static Event* te_ptr = &te;
   
   te_ptr->refresh();                //demonstrating polymorphism. We can have an array of Event types and call refresh() on all of them
