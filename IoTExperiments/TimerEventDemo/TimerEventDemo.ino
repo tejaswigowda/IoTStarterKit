@@ -16,7 +16,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  static TimerEvent te = TimerEvent(millis(), 500, &toggleLED);
-  Serial.println(te.refresh());
-  delay(100);
+  static TimerEvent te = TimerEvent(millis(), 500, &toggleLED, MILLIS);
+  static Event* te_ptr = &te;
+  te_ptr->refresh();
+  //Serial.println(te.refresh());
+  //delay(100);
 }

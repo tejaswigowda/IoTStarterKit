@@ -1,7 +1,7 @@
 #include "TimerEvent.h"
 
 TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void (*newCallbackFunction)(void), bool usesMillis = true){
-	if(usesMillis == true){														//use either millis() or micro() to get current system time
+	if(usesMillis == true){														//use either millis() or micros() to get current system time
 		getTime = &millis;
 	}
 	else{

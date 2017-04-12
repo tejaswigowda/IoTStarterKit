@@ -1,16 +1,9 @@
 #if !defined(TIMER_EVENT_H)
 #define TIMER_EVENT_H
 
-#include "IoTStarterKit.h"
+#include "Event.h"
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
-
-
-class TimerEvent{
+class TimerEvent : public Event{
 private:
 	unsigned long scheduledTime, timeInterval;								//used to compare current time to scheduled time of callback
 	unsigned long (*getTime)(void);											//set a pointer to address of micro() or millis() so we don't have to check a condition each pass through loop
