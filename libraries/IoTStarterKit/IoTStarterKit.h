@@ -12,7 +12,7 @@ Phillip Noel
 #define IOTSTARTERKIT_H
 
 /*
-DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "index" is used somewhere in the esp core and the compiler will return a "redefinition" error.
+DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "index" is used somewhere in the esp core and the compiler will return a "redefinition error".
 */
 
 #define IOT_SUCCESS  		0
@@ -32,8 +32,8 @@ DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "i
 #define STEPPER_ID			7
 
 
-#define DHT_HUMIDITY 	false
 #define DHT_TEMPERATURE true
+#define DHT_HUMIDITY 	false
 
 #define RGB_RED 	255, 0, 0
 #define RGB_ORANGE  255, 150, 0
@@ -52,8 +52,8 @@ DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "i
 #define USESMCP true
 #define NOMCP 	false
 
-#define STEPPER_COUNTERCLOCKWISE 	false
-#define STEPPER_CLOCKWISE 			true
+#define STEPPER_COUNTERCLOCKWISE 	true
+#define STEPPER_CLOCKWISE 			false
 
 #define MILLIS true
 #define MICROS false

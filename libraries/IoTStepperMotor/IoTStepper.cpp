@@ -24,7 +24,7 @@ int IoTStepper::setupController(uint8_t newA, uint8_t newB, uint8_t newC, uint8_
 	pinMode(C, OUTPUT);
 	pinMode(D, OUTPUT);
 
-	digitalWrite(A, HIGH);																			//The initial state must be 1000!
+	digitalWrite(A, HIGH);																//The initial state must be 0b1000!
 	digitalWrite(B, LOW);
 	digitalWrite(C, LOW);
 	digitalWrite(D, LOW);
@@ -32,23 +32,8 @@ int IoTStepper::setupController(uint8_t newA, uint8_t newB, uint8_t newC, uint8_
 	return IOT_SUCCESS;
 }
 
-int IoTStepper::rotate(float steps, bool newDirection, uint32_t newWaitInterval){
-	if(setMotion(steps, newDirection, newWaitInterval) != IOT_SUCCESS){
-		return IOT_FAILURE;
-	}
 
-	while(update() != IOT_SUCCESS){
-		//do nothing. wait for rotation to complete
-		delayMicroseconds(20);
-	}
-
-	return IOT_SUCCESS;
-}
-
-int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterval){ //negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
-	if(newWaitInterval < 0)
-		return IOT_FAILURE;
-	waitInterval = newWaitInterval;
+int IoTStepper::setMotion(float steps, bool newDirection){ 								//negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
 
 	direction = newDirection;
 
@@ -60,7 +45,7 @@ int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterv
 		desiredPos = INFINITY;
 	}
 	else{
-		desiredPos = (steps < 0) ? (-1 * steps) : steps;							//desiredPos is negative if the stepper should rotate CCW
+		desiredPos = (steps < 0) ? (-1 * steps) : steps;								//desiredPos is negative if the stepper should rotate CCW
 		if(newDirection == false){
 			desiredPos *= -1;
 		}	
@@ -71,7 +56,7 @@ int IoTStepper::setMotion(float steps, bool newDirection, uint32_t newWaitInterv
 	return IOT_SUCCESS;
 }
 
-int IoTStepper::update(){
+int IoTStepper::update(){																//must be invoked for every 1/2-step the motor moves!
 	static unsigned long currentTime, nextStepTime;
 	static uint8_t currentPhase, nextPhase;
   	static int currentPin;
@@ -81,12 +66,6 @@ int IoTStepper::update(){
 			return IOT_SUCCESS;
 		}
   	}
-	
-
-	currentTime = micros();																//check the time and break if it is not time to move the stepper
-	if((unsigned long)(currentTime - nextStepTime) < waitInterval)						//this conditional WILL handle counter overflow!
-		return IOT_UNKNOWN;
-	nextStepTime += waitInterval;														//update the schedule for the next step
 	
 	currentPhase = currentPos % 8;														//the stepper has 8 different states
 	currentPos += (direction == true) ? 1 : -1;											//increment or decrement position according to direction

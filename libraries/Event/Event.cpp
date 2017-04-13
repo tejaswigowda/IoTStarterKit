@@ -2,6 +2,6 @@
 
 Event::Event(){}
 
-int Event::refresh(){
+int Event::update(){
 	return IOT_SUCCESS;
 }

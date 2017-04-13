@@ -23,7 +23,7 @@ protected:
 	void (*callbackFunction)(void);	//every callback function must take no paramteres and return nothing!
 public:
 				Event();			//constructor
-	virtual int refresh();			//Every Event should be able to refresh (and invoke a callback)
+	virtual int update();			//Every Event should be able to refresh (and invoke a callback)
 };
 
 
