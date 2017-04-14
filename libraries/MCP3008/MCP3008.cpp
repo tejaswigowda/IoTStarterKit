@@ -31,17 +31,17 @@ uint16_t readMCP3008(uint8_t channel, int cs){
   byte two   = 0b10000000 | (channel << 4);                       //differential bit and 3 bits for the channel. Next two bits received are not used, last 2 are
   byte three = 0b00000000;                                        //these 8 bits are part of the output
 
-  byte bytesBack[3];
+  byte bytesBack1, bytesBack2;
 
 
   digitalWrite(cs, LOW);                                          //bring cs low to communicate with device
 
                  SPI.transfer(one);                               //don't need bytes read back
-  bytesBack[1] = SPI.transfer(two);                               //will only need last 2 bytes of response
-  bytesBack[2] = SPI.transfer(three);                             //need all 8 bytes of response
+  bytesBack1   = SPI.transfer(two);                               //will only need last 2 bytes of response
+  bytesBack2   = SPI.transfer(three);                             //need all 8 bytes of response
 
   digitalWrite(cs, HIGH);                                         //bring cs high when done communicating
 
-  return ( ((uint16_t)(bytesBack[1] % 4) << 8) | bytesBack[2] );  //output of MCP3008 is Most Significant Bit first (MSB). Need last 2 bits of bytesBack[1] and all 8 bits of bytesBack[2]
+  return ( ((uint16_t)(bytesBack1 % 4) << 8) | bytesBack2 );  //output of MCP3008 is Most Significant Bit first (MSB). Need last 2 bits of bytesBack[1] and all 8 bits of bytesBack[2]
 
 }

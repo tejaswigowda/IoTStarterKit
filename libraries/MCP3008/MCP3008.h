@@ -15,6 +15,13 @@ Phillip Noel
 #define MCP3008_H
 
 #include "IoTStarterKit.h"
+
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
+
 #include <SPI.h>
 
 int 	 setupMCP3008(int);

@@ -1,6 +1,6 @@
-#include "TimerEvent.h"
+#include "TimeEvent.h"
 
-TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void (*newCallbackFunction)(void), bool usesMillis = true){
+TimeEvent::TimeEvent(unsigned long start, unsigned long newTimeInterval, void (*newCallbackFunction)(void), bool usesMillis = true){
 	if(usesMillis == true)														//use either millis() or micros() to get current system time
 		getTime = &millis;
 	else
@@ -9,7 +9,7 @@ TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void 
 	if(start < 0)
 		scheduledTime = 0;
 	else
-		scheduledTime = start;													//set the start time for TimerEvent (in case user wants to wait to start timer, or synchronize all TimerEvent instances)
+		scheduledTime = start;													//set the start time for TimeEvent (in case user wants to wait to start Time, or synchronize all TimeEvent instances)
 	
 	if(newTimeInterval < 0)
 		timeInterval = 0;
@@ -19,21 +19,21 @@ TimerEvent::TimerEvent(unsigned long start, unsigned long newTimeInterval, void 
 	callbackFunction = newCallbackFunction;										//every callback function must take no parameters and return nothing!
 }
 
-void TimerEvent::setTimeInterval(unsigned long newTimeInterval){
+void TimeEvent::setTimeInterval(unsigned long newTimeInterval){
 	if(newTimeInterval < 0)
 		return;
 	else
 		timeInterval = newTimeInterval;											//set the "delay"
 }
 
-void TimerEvent::setScheduledTime(unsigned long start){
+void TimeEvent::setScheduledTime(unsigned long start){
 	if(start < 0)
 		scheduledTime = 0;
 	else
-		scheduledTime = start;													//set the start time for TimerEvent (in case user wants to wait to start timer, or synchronize all TimerEvent instances)
+		scheduledTime = start;													//set the start time for TimeEvent (in case user wants to wait to start Time, or synchronize all TimeEvent instances)
 }
 
-int TimerEvent::update(){
+int TimeEvent::update(){
 
 	if((unsigned long)(getTime() - scheduledTime) > timeInterval){				//getTime() is the function pointer to millis()/micros(). THIS CONDITION STATEMENT WILL HANDLE ROLLOVER (overflow)
 		scheduledTime += timeInterval;											//update schedule

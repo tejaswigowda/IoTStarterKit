@@ -1,6 +1,6 @@
 #include "MCP3008.h"
 
-#define CSPIN D8
+#define CSPIN 8
 
 void setup() {
   // put your setup code here, to run once:

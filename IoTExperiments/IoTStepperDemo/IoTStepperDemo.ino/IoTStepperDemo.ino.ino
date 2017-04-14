@@ -1,4 +1,4 @@
-#include "TimerEvent.h"
+#include "TimeEvent.h"
 #include "IoTStepper.h"
 
 IoTStepper stepper;
@@ -13,7 +13,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  static TimerEvent te = TimerEvent(millis(), 1000, [](){stepper.update(); return;}, MICROS); //uses a lambda because the stepper update() function does not return void
+  static TimeEvent te = TimeEvent(millis(), 1000, [](){stepper.update(); return;}, MICROS); //uses a lambda because the stepper update() function does not return void
 
   te.update();
 
