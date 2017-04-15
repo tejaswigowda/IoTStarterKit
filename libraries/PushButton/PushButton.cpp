@@ -5,11 +5,6 @@ PushButton::PushButton(){
 	objectID = PUSHBUTTON_ID;
 }
 
-PushButton::PushButton(int newReadPin){
-	objectID = PUSHBUTTON_ID;
-	setReadPin(newReadPin);
-}
-
 int PushButton::setReadPin(int newReadPin){
 	if(newReadPin < 0){
 		return IOT_FAILURE;

@@ -11,9 +11,9 @@ Phillip Noel
 #if !defined(IOT_STEPPER_H)
 #define IOT_STEPPER_H
 
-#include "Controller.h"
+#include "Actuator.h"
 
-class IoTStepper : public Controller{
+class IoTStepper : public Actuator{
 private:
 	uint8_t A, B, C, D, direction;
 	unsigned long currentPos; 
@@ -25,7 +25,7 @@ private:
 public:
 	IoTStepper();
 
-	int 	setupController(uint8_t, uint8_t, uint8_t, uint8_t);		//tell the object which pins to use to control stepper and set pin mode and starting pin state.
+	int 	setupActuator(uint8_t, uint8_t, uint8_t, uint8_t);			//tell the object which pins to use to control stepper and set pin mode and starting pin state.
 	
 	int 	setMotion(float, bool);										//tells the stepper motor how many steps to make, in which direction (false is ccw) and the time interval between steps (in micros)
 	

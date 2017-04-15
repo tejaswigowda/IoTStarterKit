@@ -4,7 +4,7 @@ IoTStepper::IoTStepper(){
 	objectID = STEPPER_ID;
 }
 
-int IoTStepper::setupController(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t newD){ //set pin modes, define pins in "pins" array (using bitwise ops), and digitWrite into starting position
+int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t newD){ //set pin modes, define pins in "pins" array (using bitwise ops), and digitWrite into starting position
 	if(A < 0 || B < 0 | C < 0 || D < 0){
 		return IOT_FAILURE;
 	}

@@ -1,6 +1,6 @@
 #include "IoTHeartbeat.h"
 
-IoTHeartbeat hr(true, 0, D8);
+IoTHeartbeat hr;
 
 void setup() {
   // put your setup code here, to run once:
@@ -8,15 +8,7 @@ void setup() {
   Serial.println();
   Serial.println(hr.getObjectID());
   
-  SPI.begin();
-  SPI.setFrequency(1350000L);
-  
-  pinMode(D8, OUTPUT);
-  digitalWrite(D8, HIGH);
-  digitalWrite(D8, LOW);
-  digitalWrite(D8, HIGH);
-  
-  hr.setupSensor();
+  hr.setupSensor(true, A0, -1);
 
   unsigned long tick = micros();
   for(uint16_t i = 0; i < 65000; i++){

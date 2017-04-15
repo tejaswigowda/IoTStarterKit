@@ -7,7 +7,7 @@ IoTPot::IoTPot(){
 
 int IoTPot::setupSensor(){ 		//when no parameters supplied, assume user is using NodeMCU without the MCP3008 (meaning they will use the only ADC channel on the board, A0)			
 	usesMCP = false;
-	channel = A0;
+	channel = 0;
 	return IOT_FAILURE;
 }
 

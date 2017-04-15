@@ -1,32 +1,15 @@
 #include "IoTDHT11.h"
 
 
-IoTDHT11::IoTDHT11() : dhtsensor(readPin, DHT11) {
+IoTDHT11::IoTDHT11() : dhtSensor(0,0,0){
 	objectID = DHT11_ID;
-}
-
-IoTDHT11::IoTDHT11(int newReadPin) : dhtsensor(newReadPin, DHT11) {
-	objectID = DHT11_ID;
-
-	if(newReadPin <= 0)
-		IoTDHT11();
-
-}
-
-int IoTDHT11::setReadPin(int newReadPin){
-	if(newReadPin < 0){
-		return IOT_FAILURE;
-	}
-
-	readPin = newReadPin;
-
-	return IOT_SUCCESS;
 }
 
 
 int IoTDHT11::setupSensor(){
 	if(readPin >= 0){
-		dhtsensor.begin();
+		dhtSensor = DHT(readPin, DHT11);
+		dhtSensor.begin();
 		return IOT_SUCCESS;
 	}
 	
@@ -34,12 +17,11 @@ int IoTDHT11::setupSensor(){
 }
 
 int IoTDHT11::setupSensor(int newReadPin){
-
-	if(setReadPin(newReadPin) == IOT_UNKNOWN){
+	if(newReadPin < 0)
 		return IOT_FAILURE;
-	}
 
-	IoTDHT11::setupSensor();
+	dhtSensor = DHT(newReadPin, DHT11);
+	dhtSensor.begin();
 
 	return IOT_SUCCESS;
 
@@ -50,13 +32,13 @@ float IoTDHT11::readSensor(){
 		return NAN;
 	}
 
-	return dhtsensor.readTemperature(false);
+	return dhtSensor.readTemperature(false);
 }
 
 float IoTDHT11::readSensor(bool val){
 	if(val == DHT_HUMIDITY){
-		return dhtsensor.readHumidity();
+		return dhtSensor.readHumidity();
 	}
 	
-	return dhtsensor.readTemperature(false);
+	return dhtSensor.readTemperature(false);
 }

@@ -1,9 +1,10 @@
 #include "RGB_LED.h"
 
-RGB_LED led(D3, D2, D1);
+RGB_LED led;
+
 void setup() {
   // put your setup code here, to run once:
-
+  led.setPins(2, 3, 4);
 }
 
 void loop() {

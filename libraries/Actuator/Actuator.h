@@ -4,8 +4,8 @@ Phillip Noel
 */
 
 
-#if !defined(CONTROLLER_H)
-#define CONTROLLER_H
+#if !defined(ACTUATOR_H)
+#define ACTUATOR_H
 
 #include "IoTStarterKit.h"
 
@@ -19,12 +19,12 @@ Phillip Noel
 
 
 
-class Controller{
+class Actuator{
 protected:
 	  		int   objectID;
 
 public:
-		    	  Controller(	void);
+		    	  Actuator(	void);
 			int   getObjectID(  void); //This does not need to be overridden
 };
 

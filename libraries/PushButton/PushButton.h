@@ -15,7 +15,6 @@ protected:
 
 public:
 	              PushButton( void);
-		      	  PushButton(  int);
 			int   setReadPin(  int);
 
 			//inherited from Sensor.h

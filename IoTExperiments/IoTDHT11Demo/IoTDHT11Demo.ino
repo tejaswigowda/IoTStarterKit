@@ -6,7 +6,7 @@
 
 #include "IoTDHT11.h"
 
-IoTDHT11 dht(2);                                 //Create the object
+IoTDHT11 dht;                                 //Create the object
 
 void setup() {
   // put your setup code here, to run once:
@@ -14,7 +14,7 @@ void setup() {
   delay(10);
   Serial.println();
   
-  dht.setupSensor();                              //Setup the object
+  dht.setupSensor(2);                              //Setup the object
   
   Serial.print(F("IoTDHT11 object id: "));
   Serial.println(dht.getObjectID());

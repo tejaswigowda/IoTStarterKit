@@ -2,18 +2,17 @@
 #define RGB_LED_H
 
 #include "IoTStarterKit.h"
-#include "Controller.h"
+#include "Actuator.h"
 
 
-class RGB_LED : public Controller{
+class RGB_LED : public Actuator{
 private:
 	int redPin, greenPin, bluePin;
 
 public:
 			RGB_LED();
-		 	RGB_LED(int, int, int);
 
-    void 	setPins(int, int, int);
+    int 	setPins(int, int, int);
 	void 	writeLED(int, int, int);
 };
 

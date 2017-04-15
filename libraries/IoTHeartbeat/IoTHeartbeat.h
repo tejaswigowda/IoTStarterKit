@@ -15,7 +15,6 @@ private:
 
 public:
 				IoTHeartbeat();
-				IoTHeartbeat(bool, int, int);
 
 	int 		setupSensor();
 	int 		setupSensor(bool, int, int);

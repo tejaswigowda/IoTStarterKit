@@ -9,7 +9,7 @@
 
 #include "PushButton.h"
 
-PushButton button = PushButton();                                 //Create object
+PushButton button;                                                //Create object
 int ledPin = 13;
 
 void setup() {

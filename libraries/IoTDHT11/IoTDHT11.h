@@ -16,15 +16,13 @@ Phillip Noel
 class IoTDHT11 : public Sensor{
 protected:
 	uint8_t   	readPin = -1; 		//-1 by default to force user to specify the readPin
-	DHT   		dhtsensor;
+	DHT   		dhtSensor;
 
 public:
           		IoTDHT11( void);
-      	  		IoTDHT11(  int);
-	int   		setReadPin(int);
 
 	//inherited from Sensor.h
-	int   		setupSensor(void);
+    int 		setupSensor(void);
 	int   		setupSensor( int);
 	float 		readSensor( void);
 	float 		readSensor( bool);

@@ -5,12 +5,6 @@ IoTHeartbeat::IoTHeartbeat(){
 	usesMCP = false;
 }
 
-IoTHeartbeat::IoTHeartbeat(bool enableMCP, int newChannel, int newcsPin = -1){
-	objectID = HEARTBEAT_ID;
-	setupSensor(enableMCP, newChannel, newcsPin);
-}
-
-
 int IoTHeartbeat::setupSensor(){
 	return IOT_UNKNOWN;
 }
@@ -31,7 +25,7 @@ int IoTHeartbeat::setupSensor(bool enableMCP, int newChannel, int newcsPin = -1)
 
 float IoTHeartbeat::readSensor(){
 	if(usesMCP == true){
-		return readMCP(channel, csPin);
+		return readMCP3008(channel, csPin);
 	}
 	return analogRead(channel);
 }

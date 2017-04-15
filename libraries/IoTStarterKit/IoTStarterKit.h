@@ -20,7 +20,7 @@ DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "i
 #define IOT_UNKNOWN    	   -1
 
 #define SENSOR_ID 	   	   -1
-#define CONTROLLER_ID		1
+#define ACTUATOR_ID			1
 
 #define PUSHBUTTON_ID 		2
 #define DHT11_ID 			3
