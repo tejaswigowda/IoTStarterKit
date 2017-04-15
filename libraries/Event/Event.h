@@ -21,9 +21,13 @@ Phillip Noel
 class Event{
 protected:
 	void (*callbackFunction)(void);	//every callback function must take no paramteres and return nothing!
+	bool enable = false;
 public:
-				Event();			//constructor
-	virtual int update();			//Every Event should be able to refresh (and invoke a callback)
+	   	         Event();			//constructor
+	 		 int setupEvent();		//setup
+     		 int start();			//enable the protothreah
+	 		 int stop();			//disable the protothread (invoking update() will do nothing)
+	 virtual int update();			//Every Event should be able to refresh (and invoke a callback)
 };
 
 

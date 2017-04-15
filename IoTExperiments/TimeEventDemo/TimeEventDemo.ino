@@ -1,9 +1,11 @@
 #include "TimeEvent.h"
 
 void toggleLED(){
-  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN)^1); //bitwse XOR will toggle output
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); //bitwse XOR will toggle output
   return;
 }
+
+TimeEvent te;
 
 void setup() {
   // put your setup code here, to run once:
@@ -12,13 +14,14 @@ void setup() {
 
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
+
+  unsigned long currentTime = millis();
+  te.setupEvent(currentTime, 500, &toggleLED, MILLIS);
+  te.start();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  static unsigned long currentTime = millis();
-  static TimeEvent te = TimeEvent(currentTime, 500, &toggleLED, MILLIS);
-  static Event* te_ptr = &te;
   
-  te_ptr->update();                //demonstrating polymorphism. We can have an array of Event types and call refresh() on all of them
+  te.update();                //demonstrating polymorphism. We can have an array of Event types and call refresh() on all of them
 }

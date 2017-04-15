@@ -1,6 +1,10 @@
 #include "TimeEvent.h"
 
-TimeEvent::TimeEvent(unsigned long start, unsigned long newTimeInterval, void (*newCallbackFunction)(void), bool usesMillis = true){
+TimeEvent::TimeEvent(){
+	
+}
+
+int TimeEvent::setupEvent(unsigned long start, unsigned long newTimeInterval, void (*newCallbackFunction)(void), bool usesMillis = true){
 	if(usesMillis == true)														//use either millis() or micros() to get current system time
 		getTime = &millis;
 	else
@@ -17,6 +21,8 @@ TimeEvent::TimeEvent(unsigned long start, unsigned long newTimeInterval, void (*
 		timeInterval = newTimeInterval;											//set the "delay"	
 
 	callbackFunction = newCallbackFunction;										//every callback function must take no parameters and return nothing!
+
+	return IOT_UNKNOWN;
 }
 
 void TimeEvent::setTimeInterval(unsigned long newTimeInterval){
@@ -34,6 +40,8 @@ void TimeEvent::setScheduledTime(unsigned long start){
 }
 
 int TimeEvent::update(){
+	//if(enable == false)
+	//	return IOT_FAILURE;
 
 	if((unsigned long)(getTime() - scheduledTime) > timeInterval){				//getTime() is the function pointer to millis()/micros(). THIS CONDITION STATEMENT WILL HANDLE ROLLOVER (overflow)
 		scheduledTime += timeInterval;											//update schedule

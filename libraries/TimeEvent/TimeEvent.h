@@ -18,13 +18,14 @@ protected:
 	unsigned long (*getTime)(void);											//set a pointer to address of micro() or millis() so we don't have to check a condition each pass through loop
 
 public:
-	TimeEvent(unsigned long, unsigned long, void (*)(void), bool);			//starting time, time interval, callback function, and uses millis()/micros()
+			TimeEvent();
 
-	void setTimeInterval(unsigned long);									//reset the time interval
-	void setScheduledTime(unsigned long);									//explicitly set next schedule time (can be used for synchronizing TimeEvents)
+	int 	setupEvent(unsigned long, unsigned long, void (*)(void), bool);	//starting time, time interval, callback function, and uses millis()/micros()
 
-	int update();															//check if time event has occurred and invoke callback
+	void 	setTimeInterval(unsigned long);									//reset the time interval
+	void 	setScheduledTime(unsigned long);								//explicitly set next schedule time (can be used for synchronizing TimeEvents)
 
+	int 	update();														//check if time event has occurred and invoke callback
 };
 
 #endif
