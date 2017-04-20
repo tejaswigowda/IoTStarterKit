@@ -39,7 +39,11 @@ int IoTStepper::setMotion(bool newStepForever, bool newDirection, long steps = 0
 
 	direction = newDirection;
 
-	desiredChange = (newDirection == STEPPER_COUNTERCLOCKWISE) ? steps : -1 * steps;	
+	desiredChange = steps;
+	if(newDirection == STEPPER_CLOCKWISE && desiredChange > 0)
+		desiredChange *= -1;
+	if(newDirection == STEPPER_COUNTERCLOCKWISE && desiredChange < 0)
+		desiredChange *= -1;	
 
 	currentPos = 0;
 	
