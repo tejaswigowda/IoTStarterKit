@@ -5,14 +5,14 @@ IoTPot::IoTPot(){
 
 }
 
-int IoTPot::setupSensor(){ 		//when no parameters supplied, assume user is using NodeMCU without the MCP3008 (meaning they will use the only ADC channel on the board, A0)			
+int IoTPot::setupSensor(){ 						//when no parameters supplied, assume user is using NodeMCU without the MCP3008 (meaning they will use the only ADC channel on the board, A0)			
 	usesMCP = false;
 	channel = 0;
 	return IOT_FAILURE;
 }
 
 int IoTPot::setupSensor(bool newUsesMCP, int newChannel, int newCSPin = -1){
-	if(newChannel < 0 || newChannel > 7 || newCSPin < 0){
+	if(newChannel < 0 || newChannel > 7 || newCSPin < 0){		//make sure valid pin is supplied
 		return IOT_FAILURE;
 	}
 
@@ -31,7 +31,7 @@ float IoTPot::readSensor(){
 	return readSensorInt();
 }
 
-float IoTPot::readSensor(int mode = POT_RAW){
+float IoTPot::readSensor(int mode = POT_RAW){					//return symmetric or assymetric angle; or raw ADC output (10 bits)
 	int reading;
 	if(usesMCP == true){
 		reading = readMCP3008(channel, csPin);
@@ -63,5 +63,5 @@ int IoTPot::readSensorInt(){
 		return analogRead(A0);
 	}
 
-	return NAN;
+	return IOT_FAILURE;
 }

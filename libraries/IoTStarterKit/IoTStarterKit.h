@@ -52,6 +52,8 @@ DO NOT use "index" as a variable (sans quotes) in sketches using the NodeMCU. "i
 #define USESMCP true
 #define NOMCP 	false
 
+#define STEP_INFINITELY				true
+#define STEP_FINITELY				false
 #define STEPPER_COUNTERCLOCKWISE 	true
 #define STEPPER_CLOCKWISE 			false
 

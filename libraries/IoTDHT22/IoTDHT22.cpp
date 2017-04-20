@@ -28,14 +28,14 @@ int IoTDHT22::setupSensor(int newReadPin){
 }
 
 float IoTDHT22::readSensor(){
-	if(readPin < 0){
-		return NAN;
-	}
-
 	return dhtSensor.readTemperature(false);
 }
 
 float IoTDHT22::readSensor(bool val){
+	if(readPin < 0){
+		return NAN;
+	}
+	
 	if(val == DHT_HUMIDITY){
 		return dhtSensor.readHumidity();
 	}

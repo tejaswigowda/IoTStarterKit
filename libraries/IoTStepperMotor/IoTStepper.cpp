@@ -33,23 +33,13 @@ int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t 
 }
 
 
-int IoTStepper::setMotion(float steps, bool newDirection){ 								//negative number of steps is counterclockwise. If steps == INFINITY then rotate indefinitely
+int IoTStepper::setMotion(bool newStepForever, bool newDirection, long steps = 0){		//negative number of steps is counterclockwise. -2,147,483,648 .. 2,147,483,647 steps
+
+	stepForever = newStepForever;
 
 	direction = newDirection;
 
-	if(steps == NAN){
-		desiredPos = 0;
-	}
-
-	if(steps == INFINITY){
-		desiredPos = INFINITY;
-	}
-	else{
-		desiredPos = (steps < 0) ? (-1 * steps) : steps;								//desiredPos is negative if the stepper should rotate CCW
-		if(newDirection == false){
-			desiredPos *= -1;
-		}	
-	}
+	desiredChange = (newDirection == STEPPER_COUNTERCLOCKWISE) ? steps : -1 * steps;	
 
 	currentPos = 0;
 	
@@ -57,18 +47,17 @@ int IoTStepper::setMotion(float steps, bool newDirection){ 								//negative nu
 }
 
 int IoTStepper::update(){																//must be invoked for every 1/2-step the motor moves!
-	static unsigned long currentTime, nextStepTime;
 	static uint8_t currentPhase, nextPhase;
   	static int currentPin;
 
-  	if(desiredPos != INFINITY){
-	  	if(currentPos == (unsigned long)desiredPos){									//return success if stepper is at desired position
+  	if(stepForever == false){
+	  	if(currentPos == desiredChange){												//return success if stepper is at desired position
 			return IOT_SUCCESS;
 		}
   	}
 	
 	currentPhase = currentPos % 8;														//the stepper has 8 different states
-	currentPos += (direction == true) ? 1 : -1;											//increment or decrement position according to direction
+	currentPos += (direction ==  STEPPER_COUNTERCLOCKWISE) ? 1 : -1;					//increment or decrement position according to direction
   	nextPhase = currentPos % 8;
   
   	currentPin = phases[currentPhase]^phases[nextPhase];
@@ -88,7 +77,7 @@ int IoTStepper::end(){																	//if this function is invoked then setupC
 	digitalWrite(C, LOW);
 	digitalWrite(D, LOW);
 
-	desiredPos = 0;
+	desiredChange = 0;
 
 	return IOT_SUCCESS;
 }

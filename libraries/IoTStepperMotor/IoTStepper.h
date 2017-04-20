@@ -16,8 +16,8 @@ Phillip Noel
 class IoTStepper : public Actuator{
 private:
 	uint8_t A, B, C, D, direction;
-	unsigned long currentPos; 
-	float desiredPos = 0;
+	unsigned long currentPos, desiredChange;
+	bool stepForever = false;
 
 	const uint8_t phases[8] = {0b00001000, 0b00001100, 0b00000100, 0b00000110, 0b00000010, 0b00000011, 0b00000001, 0b00001001};
 	int pins[9] = {0};
@@ -27,7 +27,7 @@ public:
 
 	int 	setupActuator(uint8_t, uint8_t, uint8_t, uint8_t);			//tell the object which pins to use to control stepper and set pin mode and starting pin state.
 	
-	int 	setMotion(float, bool);										//tells the stepper motor how many steps to make, in which direction (false is ccw) and the time interval between steps (in micros)
+	int 	setMotion(bool, bool, long);								//rotate indefinitely or not, CW or CCW, number of steps (defaults to 0)
 	
 	int 	update();													//this must be invoked for stepper to rotate each 1/2 step increment
 
