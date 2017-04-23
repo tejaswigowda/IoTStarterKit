@@ -14,11 +14,6 @@ int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t 
 	C = newC;
 	D = newD;
 
-	pins[8] = A;
-  	pins[4] = B;
-  	pins[2] = C;
-  	pins[1] = D;
-
 	pinMode(A, OUTPUT);
 	pinMode(B, OUTPUT);
 	pinMode(C, OUTPUT);
@@ -51,8 +46,7 @@ int IoTStepper::setMotion(bool newStepForever, bool newDirection, long steps = 0
 }
 
 int IoTStepper::update(){																//must be invoked for every 1/2-step the motor moves!
-	static uint8_t currentPhase, nextPhase;
-  	static int currentPin;
+	static uint8_t currentPhase;
 
   	if(stepForever == false){
 	  	if(currentPos == desiredChange){												//return success if stepper is at desired position
@@ -62,13 +56,10 @@ int IoTStepper::update(){																//must be invoked for every 1/2-step th
 	
 	currentPhase = currentPos % 8;														//the stepper has 8 different states
 	currentPos += (direction ==  STEPPER_COUNTERCLOCKWISE) ? 1 : -1;					//increment or decrement position according to direction
-  	nextPhase = currentPos % 8;
-  
-  	currentPin = phases[currentPhase]^phases[nextPhase];
-
-  	digitalWrite(pins[currentPin], !digitalRead(pins[currentPin]));						//only one pin changes between each consecutive state
-
-	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
+  	
+  	digitalWrite(*pinToggle[currentPhase], !digitalRead(*pinToggle[currentPhase]));
+  	
+  	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
 
 unsigned long IoTStepper::getCurrentPos(){

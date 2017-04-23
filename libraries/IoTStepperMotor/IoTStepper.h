@@ -18,10 +18,9 @@ private:
 	uint8_t A, B, C, D, direction;
 	unsigned long currentPos, desiredChange;
 	bool stepForever = false;
-
-	const uint8_t phases[8] = {0b00001000, 0b00001100, 0b00000100, 0b00000110, 0b00000010, 0b00000011, 0b00000001, 0b00001001};
-	int pins[9] = {0};
-
+	
+	uint8_t* pinToggle[8] = {&B,&A,&C,&B,&D,&C,&A,&D};
+	
 public:
 	IoTStepper();
 
