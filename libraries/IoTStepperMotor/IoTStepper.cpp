@@ -14,11 +14,6 @@ int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t 
 	C = newC;
 	D = newD;
 
-	pinTransitions[1] = D;
-	pinTransitions[2] = C;
-	pinTransitions[4] = B;
-	pinTransitions[8] = A;
-
 	pinMode(A, OUTPUT);
 	pinMode(B, OUTPUT);
 	pinMode(C, OUTPUT);
@@ -59,13 +54,28 @@ int IoTStepper::update(){																//must be invoked for every 1/2-step th
   	}
   	stepsTaken++;
 	
-	currentPhase = currentPos % 8;														//the stepper has 8 different states
+	currentPhase = currentPos % 8;														//the stepper has 8 different states, 7 transitions
 	currentPos += (direction ==  STEPPER_COUNTERCLOCKWISE) ? 1 : -1;					//increment or decrement position according to direction
 	nextPhase = currentPos % 8;
 
 	togglePin = states[nextPhase] ^ states[currentPhase];								//use XOR to find which pin toggles between states
 
-	digitalWrite(pinTransitions[togglePin], !digitalRead(pinTransitions[togglePin]));	//toggle the pin
+	switch(togglePin){																	//toggle the pin to transition to next state
+		case 0b0001:
+			digitalWrite(D, !digitalRead(D));
+			break;
+		case 0b0010:
+			digitalWrite(C, !digitalRead(C));
+			break;
+		case 0b0100:
+			digitalWrite(B, !digitalRead(B));
+			break;
+		case 0b1000:
+			digitalWrite(A, !digitalRead(A));
+			break;
+	}
+
+	//digitalWrite(pinTransitions[togglePin], !digitalRead(pinTransitions[togglePin]));	//toggle the pin
   	
   	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
