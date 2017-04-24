@@ -5,7 +5,7 @@ The stepper can ONLY move as fast as update() is invoked and appears to become u
 not step if update() is not invoked.
 
 Phillip Noel
-05-APR-2017
+23-APR-2017
 */
 
 #if !defined(IOT_STEPPER_H)
@@ -19,7 +19,8 @@ private:
 	unsigned long currentPos, desiredChange;
 	bool stepForever = false;
 	
-	uint8_t* pinToggle[8] = {&B,&A,&C,&B,&D,&C,&A,&D};
+	const uint8_t states[8] = {0b1000, 0b1100, 0b0100, 0b0110, 0b0010, 0b0011, 0b0001, 0b1001};
+	int8_t pinTransitions[9] = {-1};
 	
 public:
 	IoTStepper();

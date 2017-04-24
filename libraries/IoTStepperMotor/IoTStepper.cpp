@@ -14,6 +14,11 @@ int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t 
 	C = newC;
 	D = newD;
 
+	pinTransitions[1] = A;
+	pinTransitions[2] = B;
+	pinTransitions[4] = C;
+	pinTransitions[8] = D;
+
 	pinMode(A, OUTPUT);
 	pinMode(B, OUTPUT);
 	pinMode(C, OUTPUT);
@@ -46,7 +51,8 @@ int IoTStepper::setMotion(bool newStepForever, bool newDirection, long steps = 0
 }
 
 int IoTStepper::update(){																//must be invoked for every 1/2-step the motor moves!
-	static uint8_t currentPhase;
+	static uint8_t currentPhase, nextPhase;
+	uint8_t togglePin;
 
   	if(stepForever == false){
 	  	if(currentPos == desiredChange){												//return success if stepper is at desired position
@@ -56,8 +62,21 @@ int IoTStepper::update(){																//must be invoked for every 1/2-step th
 	
 	currentPhase = currentPos % 8;														//the stepper has 8 different states
 	currentPos += (direction ==  STEPPER_COUNTERCLOCKWISE) ? 1 : -1;					//increment or decrement position according to direction
-  	
-  	digitalWrite(*pinToggle[currentPhase], !digitalRead(*pinToggle[currentPhase]));
+	nextPhase = currentPos % 8;
+
+	togglePin = states[nextPhase]^states[currentPhase];
+
+	digitalWrite(pinTransitions[togglePin], !digitalRead(pinTransitions[togglePin]));
+
+	Serial.print(currentPos);
+	Serial.print(",");
+	Serial.print(currentPhase);
+	Serial.print(",");
+	Serial.print(nextPhase);
+	Serial.print(",");
+	Serial.print(togglePin);
+	Serial.print(",");
+	Serial.println(pinTransitions[togglePin]);	
   	
   	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }

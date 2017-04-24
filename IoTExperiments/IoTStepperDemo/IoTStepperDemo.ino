@@ -3,19 +3,27 @@
 
 IoTStepper stepper;
 TimeEvent te;
+TimeEvent te2;
+
+bool sd = STEPPER_COUNTERCLOCKWISE;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
 
   stepper.setupActuator(2, 3, 4, 5);
-  stepper.setMotion(STEP_INFINITELY, STEPPER_COUNTERCLOCKWISE, 4096);
+  stepper.setMotion(STEP_INFINITELY, sd, 4096);
 
-  te.setupEvent(millis(), 1000, [](){stepper.update(); return;}, MICROS); //uses a lambda because the stepper update() function does not return void
+  unsigned long ct = millis();
+  te.setupEvent(ct, 1000, [](){stepper.update(); return;}, MILLIS); //uses a lambda because the stepper update() function does not return void
+  te2.setupEvent(ct, 10000, [](){sd = !sd; stepper.setMotion(STEP_INFINITELY, sd, 4096); Serial.println();}, MILLIS);
+  
   te.start();
+  te2.start();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   te.update();
+  te2.update();
 }
