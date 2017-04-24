@@ -16,7 +16,7 @@ Phillip Noel
 class IoTStepper : public Actuator{
 private:
 	uint8_t A, B, C, D, direction;
-	unsigned long currentPos, desiredChange;
+	long currentPos = 0, stepsTaken, desiredChange;
 	bool stepForever = false;
 	
 	const uint8_t states[8] = {0b1000, 0b1100, 0b0100, 0b0110, 0b0010, 0b0011, 0b0001, 0b1001};

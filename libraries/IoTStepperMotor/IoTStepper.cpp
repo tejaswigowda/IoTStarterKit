@@ -14,10 +14,10 @@ int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t 
 	C = newC;
 	D = newD;
 
-	pinTransitions[1] = A;
-	pinTransitions[2] = B;
-	pinTransitions[4] = C;
-	pinTransitions[8] = D;
+	pinTransitions[1] = D;
+	pinTransitions[2] = C;
+	pinTransitions[4] = B;
+	pinTransitions[8] = A;
 
 	pinMode(A, OUTPUT);
 	pinMode(B, OUTPUT);
@@ -34,18 +34,16 @@ int IoTStepper::setupActuator(uint8_t newA, uint8_t newB, uint8_t newC, uint8_t 
 
 
 int IoTStepper::setMotion(bool newStepForever, bool newDirection, long steps = 0){		//negative number of steps is counterclockwise. -2,147,483,648 .. 2,147,483,647 steps
+	if(steps < 0)
+		return IOT_FAILURE;
 
 	stepForever = newStepForever;
 
 	direction = newDirection;
 
 	desiredChange = steps;
-	if(newDirection == STEPPER_CLOCKWISE && desiredChange > 0)
-		desiredChange *= -1;
-	if(newDirection == STEPPER_COUNTERCLOCKWISE && desiredChange < 0)
-		desiredChange *= -1;	
 
-	currentPos = 0;
+	stepsTaken = 0;
 	
 	return IOT_SUCCESS;
 }
@@ -55,28 +53,19 @@ int IoTStepper::update(){																//must be invoked for every 1/2-step th
 	uint8_t togglePin;
 
   	if(stepForever == false){
-	  	if(currentPos == desiredChange){												//return success if stepper is at desired position
+	  	if(stepsTaken == desiredChange){												//return success if stepper is at desired position
 			return IOT_SUCCESS;
 		}
   	}
+  	stepsTaken++;
 	
 	currentPhase = currentPos % 8;														//the stepper has 8 different states
 	currentPos += (direction ==  STEPPER_COUNTERCLOCKWISE) ? 1 : -1;					//increment or decrement position according to direction
 	nextPhase = currentPos % 8;
 
-	togglePin = states[nextPhase]^states[currentPhase];
+	togglePin = states[nextPhase] ^ states[currentPhase];								//use XOR to find which pin toggles between states
 
-	digitalWrite(pinTransitions[togglePin], !digitalRead(pinTransitions[togglePin]));
-
-	Serial.print(currentPos);
-	Serial.print(",");
-	Serial.print(currentPhase);
-	Serial.print(",");
-	Serial.print(nextPhase);
-	Serial.print(",");
-	Serial.print(togglePin);
-	Serial.print(",");
-	Serial.println(pinTransitions[togglePin]);	
+	digitalWrite(pinTransitions[togglePin], !digitalRead(pinTransitions[togglePin]));	//toggle the pin
   	
   	return IOT_UNKNOWN;																	//return success when desired number of step (signals) have been made (we get no feedback from motor)
 }
